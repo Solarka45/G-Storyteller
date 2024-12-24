@@ -35,7 +35,7 @@ def generate():
 
     # Set up the model
     generation_config = {
-        "temperature": 0.9,
+        "temperature": 1.0,
         "top_p": 1,
         "top_k": 1,
         "max_output_tokens": 2048,
@@ -62,10 +62,11 @@ def generate():
 
     model = genai.GenerativeModel(model_name=selected_model,
                                   generation_config=generation_config,
-                                  safety_settings=safety_settings)
+                                  safety_settings=safety_settings,
+                                  system_instruction=system_instruction)
 
     # Prepare the prompt with system instructions
-    prompt_parts = [system_instruction, data.get('story_content')]
+    prompt_parts = [data.get('story_content')]
 
     # Generate content
     try:

@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error: ' + result.error);
                 } else {
                     const storyEditor = document.getElementById('story-editor');
-                    storyEditor.innerText += '\n\n' + result.generated_text;
+                    result.generated_text = result.generated_text.replace(/\n+/g, '\n');
+                    storyEditor.innerText += '' + result.generated_text;
                 }
             })
             .catch(error => {
@@ -112,6 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
                 alert(error.message || 'An error occurred while cancelling.');
             });
+        }
+    });
+
+    // Add an event listener for keydown events
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            // Prevent the default behavior of Ctrl + Enter (e.g., adding a new line)
+            event.preventDefault();
+
+            // Trigger the generate button
+            generateButton.click();
         }
     });
 });
