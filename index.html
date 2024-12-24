@@ -15,8 +15,18 @@
         </div>
         <div class="side-section">
             <div class="form-group">
-                <label for="api-key">API Key:</label>
+                <label for="api-key">Gemini API Key:</label>
                 <input type="password" id="api-key" name="api-key">
+            </div>
+            <div class="form-group">
+                <label for="model-select">Select Model:</label>
+                <select id="model-select" name="model-select">
+                    <option value="models/gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental (Recommended)</option>
+                    <option value="models/gemini-exp-1206">Gemini Experimental 1206</option>
+                    <option value="models/gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    <option value="models/gemini-1.5-pro">Gemini 1.5 Pro</option>
+                    <option value="models/gemini-2.0-flash-thinking-exp">Gemini 2.0 Flash Thinking Experimental (Not recommended)</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="story-title">Story Title:</label>

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             generateButton.innerHTML = 'Cancel <span id="spinner" style="display: inline;"><img src="static/spinner.svg" alt="Loading..." style="width: 20px; height: 20px;"></span>';
 
             const apiKey = document.getElementById('api-key').value;
+            const selectedModel = document.getElementById('model-select').value; // Get selected model
             const storyTitle = document.getElementById('story-title').value;
             const storyTags = document.getElementById('story-tags').value;
             const settingDescription = document.getElementById('setting-description').value;
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const data = {
                 api_key: apiKey,
+                selected_model: selectedModel,
                 story_title: storyTitle,
                 story_tags: storyTags,
                 setting_description: settingDescription,

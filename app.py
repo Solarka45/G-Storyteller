@@ -21,6 +21,7 @@ def generate():
     data = request.get_json()
     api_key = data.get('api_key')
     system_instruction = data.get('system_instruction')
+    selected_model = data.get('selected_model')
 
     # Basic API key validation
     if not is_valid_api_key(api_key):
@@ -59,7 +60,7 @@ def generate():
         },
     ]
 
-    model = genai.GenerativeModel(model_name="models/gemini-2.0-flash-exp",
+    model = genai.GenerativeModel(model_name=selected_model,
                                   generation_config=generation_config,
                                   safety_settings=safety_settings)
 
