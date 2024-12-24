@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Storyteller</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-section">
+            <div id="story-editor" contenteditable="true">
+                <!-- Initial story content or placeholder can be added here -->
+            </div>
+        </div>
+        <div class="side-section">
+            <div class="form-group">
+                <label for="api-key">API Key:</label>
+                <input type="password" id="api-key" name="api-key">
+            </div>
+            <div class="form-group">
+                <label for="story-title">Story Title:</label>
+                <input type="text" id="story-title" name="story-title">
+            </div>
+            <div class="form-group">
+                <label for="story-tags">Story Tags:</label>
+                <textarea id="story-tags" name="story-tags" placeholder="e.g., fantasy, sci-fi, adventure, etc."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="setting-description">Setting Description:</label>
+                <textarea id="setting-description" name="setting-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="memory">Memory:</label>
+                <textarea id="memory" name="memory"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="system-instruction">System Instruction:</label>
+                <textarea id="system-instruction" name="system-instruction" placeholder="Enter system instructions here"></textarea>
+            </div>
+            <button id="generate-button">
+                Generate
+                <span id="spinner" style="display: none;">
+                    <img src="static/spinner.svg" alt="Loading..." style="width: 20px; height: 20px;">
+                </span>
+            </button>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>
