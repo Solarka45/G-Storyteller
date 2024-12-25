@@ -14,23 +14,29 @@ body, html {
     height: 100%;
 }
 
-.main-section {
-    flex: 70%; /* Occupies 70% of the width */
-    padding: 20px;
-    overflow-y: auto;
+.left-section {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
 }
 
-#story-editor {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-size: 16px;
-    line-height: 1.5;
+.title-section {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.title-section .form-group {
+    margin-bottom: 0;
+}
+
+.title-section label {
+    font-weight: bold;
+}
+
+.main-section {
+    flex: 1;
+    padding: 20px;
     overflow-y: auto;
-    resize: none;
-    background-color: #f9f9f9;
-    color: #333;
 }
 
 .side-section {
@@ -51,6 +57,19 @@ label {
     font-weight: bold;
 }
 
+#story-editor {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-y: auto;
+    resize: none;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
 input[type="text"],
 input[type="password"],
 textarea {
@@ -66,20 +85,6 @@ textarea {
     min-height: 100px;
 }
 
-details {
-    margin-bottom: 15px; /* Add some spacing around the details section */
-}
-
-summary {
-    cursor: pointer; /* Make the summary look clickable */
-    font-weight: bold;
-    outline: none; /* Remove default outline on focus in some browsers */
-}
-
-details[open] summary {
-    margin-bottom: 10px; /* Add spacing when open */
-}
-
 #generate-button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -92,4 +97,19 @@ details[open] summary {
 
 #generate-button:hover {
     background-color: #0056b3;
+}
+
+details {
+    margin-bottom: 15px; /* Add some spacing around the details section */
+}
+
+summary {
+    cursor: pointer; /* Make the summary look clickable */
+    font-weight: bold;
+    outline: none; /* Remove default outline on focus in some browsers */
+}
+
+/* Optional: Style the open/closed state */
+details[open] summary {
+    margin-bottom: 10px; /* Add spacing when open */
 }

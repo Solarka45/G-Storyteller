@@ -26,6 +26,8 @@ def generate():
     selected_model = data.get('selected_model')
     temperature = data.get('temperature')
     outputLength = data.get('outputLength')
+    additional_details = data.get('additional_details')
+    plot_direction = data.get('plot_direction')
 
     # Basic API key validation
     if not is_valid_api_key(api_key):
@@ -70,7 +72,11 @@ def generate():
                                   system_instruction=system_instruction)
 
     # Prepare the prompt with system instructions
-    prompt_parts = [data.get('story_content')]
+    prompt_parts = [
+        additional_details,
+        plot_direction,
+        data.get('story_content')
+    ]
 
     # Generate content
     try:

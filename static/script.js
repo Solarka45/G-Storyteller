@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const selectedModel = document.getElementById('model-select').value; // Get selected model
             const storyTitle = document.getElementById('story-title').value;
             const storyTags = document.getElementById('story-tags').value;
-            const settingDescription = document.getElementById('setting-description').value;
-            const memory = document.getElementById('memory').value;
+            const additionalDetails = document.getElementById('additional-details').value;
+            const plotDirection = document.getElementById('plot-direction').value;
             const storyContent = document.getElementById('story-editor').innerText;
             const systemInstruction = document.getElementById('system-instruction').value; // Get system instruction
             
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 selected_model: selectedModel,
                 story_title: storyTitle,
                 story_tags: storyTags,
-                setting_description: settingDescription,
-                memory: memory,
+                additional_details: additionalDetails,
+                plot_direction: plotDirection,
                 story_content: storyContent,
                 system_instruction: systemInstruction,
                 temperature: temperature,

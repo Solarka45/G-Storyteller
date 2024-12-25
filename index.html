@@ -8,15 +8,24 @@
 </head>
 <body>
     <div class="container">
-        <div class="main-section">
-            <div id="story-editor" contenteditable="true">
-                <!-- Initial story content or placeholder can be added here -->
+        <div class="left-section">
+            <div class="title-section">
+                <div class="form-group">
+                    <input type="text" id="story-title" name="story-title" placeholder="Story Title">
+                </div>
+            </div>
+            <div class="main-section">
+                <div id="story-editor" contenteditable="true">
+                    <!-- Initial story content or placeholder can be added here -->
+                </div>
             </div>
         </div>
         <div class="side-section">
             <div class="form-group">
-                <label for="api-key">Gemini API Key</label>
-                <input type="password" id="api-key" name="api-key">
+                <details>
+                    <summary>Gemini API Key</summary>
+                    <input type="password" id="api-key" name="api-key">
+                </details>
             </div>
             <div class="form-group">
                 <label for="model-select">Select Model</label>
@@ -29,20 +38,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="story-title">Story Title</label>
-                <input type="text" id="story-title" name="story-title">
+                <label for="additional-details">Additional Details</label>
+                <textarea id="additional-details" name="additional-details" placeholder="Enter additional story details here (f.e. setting details)"></textarea>
             </div>
             <div class="form-group">
-                <label for="story-tags">Story Tags</label>
-                <textarea id="story-tags" name="story-tags" placeholder="e.g., fantasy, sci-fi, adventure, etc."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="setting-description">Setting Description</label>
-                <textarea id="setting-description" name="setting-description"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="memory">Memory</label>
-                <textarea id="memory" name="memory"></textarea>
+                <label for="plot-direction">Plot Direction</label>
+                <textarea id="plot-direction" name="plot-direction" placeholder="Enter the desired plot direction here (summary of what should be happening)"></textarea>
             </div>
             <div class="form-group">
                 <details>
