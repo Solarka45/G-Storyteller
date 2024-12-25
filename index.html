@@ -28,22 +28,44 @@
                 </details>
             </div>
             <div class="form-group">
-                <label for="model-select">Select Model</label>
-                <select id="model-select" name="model-select">
-                    <option value="models/gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental (Recommended)</option>
-                    <option value="models/gemini-exp-1206">Gemini Experimental 1206</option>
-                    <option value="models/gemini-1.5-flash">Gemini 1.5 Flash</option>
-                    <option value="models/gemini-1.5-pro">Gemini 1.5 Pro</option>
-                    <option value="models/gemini-2.0-flash-thinking-exp">Gemini 2.0 Flash Thinking Experimental (Not recommended)</option>
+                <label for="model-select" title="Select which Gemini model you want to generate with">Select Model</label>
+                <select id="model-select" name="model-select" title="Select which Gemini model you want to generate with">
+                    <option value="models/gemini-2.0-flash-exp" 
+title="The most balanced model, smart, creative, fast.
+Has A whooping 1 million token limit (think 8 average novels).
+1500 free generations per day (so nearly limitless).
+Recommended for most use cases."
+                        >Gemini 2.0 Flash Experimental (Recommended)</option>
+                    <option value="models/gemini-exp-1206"
+title = "The best current model, smarter than Flash, but also slower.
+An even more shooping 2 milling token limit (think 16 average novels).
+Generation limit currently unknown (probably limitless during the experimental phase).
+Use if you don't mind waiting a bit more for best results."
+                        >Gemini Experimental 1206</option>
+                    <option value="models/gemini-1.5-flash"
+title = "A legacy fast model. Not recommended as Flash 2.0 is generally better.
+1 million token limit.
+Use if you somehow managed to run out of generations for other models."
+                        >Gemini 1.5 Flash</option>
+                    <option value="models/gemini-1.5-pro"
+title = "A legacy slow and powerful model. Not recommended as Flash 2.0 is faster with similar results.
+2 million token limit.
+Only 50 generations per day.
+Honestly no idea why would you use this now, but it's there."
+                        >Gemini 1.5 Pro</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="additional-details">Additional Details</label>
-                <textarea id="additional-details" name="additional-details" placeholder="Enter additional story details here (f.e. setting details)"></textarea>
+                <label for="story-tags">Story Tags</label>
+                <textarea id="story-tags" name="story-tags" placeholder="e.g., fantasy, sci-fi, adventure, NSFW, etc."></textarea>
             </div>
             <div class="form-group">
                 <label for="plot-direction">Plot Direction</label>
                 <textarea id="plot-direction" name="plot-direction" placeholder="Enter the desired plot direction here (summary of what should be happening)"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="additional-details">Additional Details</label>
+                <textarea id="additional-details" name="additional-details" placeholder="Enter additional story details here (e.g. setting details)"></textarea>
             </div>
             <div class="form-group">
                 <details>

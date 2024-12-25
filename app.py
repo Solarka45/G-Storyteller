@@ -29,6 +29,8 @@ def generate():
     top_p = data.get('top_p')
     top_k = data.get('top_k')
 
+    story_title = data.get('story_title')
+    story_tags = data.get('story_tags')
     additional_details = data.get('additional_details')
     plot_direction = data.get('plot_direction')
 
@@ -69,6 +71,16 @@ def generate():
         },
     ]
 
+    # In case any of the inputs are empty
+    if (story_title == ""):
+        story_title = "No Title"
+    if (story_tags == ""):
+        story_tags = "No Tags"
+    if (additional_details == ""):
+        additional_details = "No Additional Details"
+    if (plot_direction == ""):
+        plot_direction = "Up to you"
+
     model = genai.GenerativeModel(model_name=selected_model,
                                   generation_config=generation_config,
                                   safety_settings=safety_settings,
@@ -76,8 +88,15 @@ def generate():
 
     # Prepare the prompt with system instructions
     prompt_parts = [
+        "Story title:\n",
+        story_title,
+        "\nStory tags:\n",
+        story_tags,
+        "\nAdditional details for the story:\n",
         additional_details,
+        "\nPlot direction:\n",
         plot_direction,
+        "\nPrevious story text:\n",
         data.get('story_content')
     ]
 
