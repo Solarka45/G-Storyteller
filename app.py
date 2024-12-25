@@ -19,9 +19,13 @@ def index():
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.get_json()
-    api_key = data.get('api_key')
-    system_instruction = data.get('system_instruction')
+    #api_key = data.get('api_key')
+    api_key = "AIzaSyBAGd1Qb1z3Fc8hwPhc25WpDblrZDfAndA"
+    #system_instruction = data.get('system_instruction')
+    system_instruction = "You are a storywriter. You will continue the provided story. Do not repeat what was entered before unless it makes sense from narrative perspective."
     selected_model = data.get('selected_model')
+    temperature = data.get('temperature')
+    outputLength = data.get('outputLength')
 
     # Basic API key validation
     if not is_valid_api_key(api_key):
@@ -35,10 +39,10 @@ def generate():
 
     # Set up the model
     generation_config = {
-        "temperature": 1.0,
+        "temperature": temperature,
         "top_p": 1,
         "top_k": 1,
-        "max_output_tokens": 2048,
+        "max_output_tokens": outputLength,
     }
 
     safety_settings = [

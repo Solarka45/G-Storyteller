@@ -4,6 +4,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const generateButton = document.getElementById('generate-button');
     const spinner = document.getElementById('spinner');
+    const temperatureSlider = document.getElementById('temperature-slider');
+    const temperatureValue = document.getElementById('temperature-value');
+    const temperatureInput = document.getElementById('temperature-input');
+    const outputLengthSlider = document.getElementById('output-length-slider');
+    const outputLengthValue = document.getElementById('output-length-value');
+    const outputLengthInput = document.getElementById('output-length-input');
+
+    function updateTemperature(value) {
+        temperatureValue.textContent = value;
+        temperatureSlider.value = value;
+        temperatureInput.value = value;
+    }
+    function updateOutputLength(value) {
+        outputLengthValue.textContent = value;
+        outputLengthSlider.value = value;
+        outputLengthInput.value = value;
+    }
+    
+    // Update temperature when the slider is moved
+    temperatureSlider.addEventListener('input', function() {
+        updateTemperature(temperatureSlider.value);
+    });
+    // Update temperature when the number input is changed
+    temperatureInput.addEventListener('input', function() {
+        let value = parseFloat(temperatureInput.value);
+        if (isNaN(value) || value < 0) {
+            value = 0;
+        } else if (value > 2) {
+            value = 2;
+        }
+        updateTemperature(value);
+    });
+
+    // Update output length when the slider is moved
+    outputLengthSlider.addEventListener('input', function() {
+        updateOutputLength(outputLengthSlider.value);
+    });
+    // Update output length when the number input is changed
+    outputLengthInput.addEventListener('input', function() {
+        let value = parseInt(outputLengthInput.value);
+        if (isNaN(value) || value < 100) {
+            value = 100;
+        } else if (value > 2048) {
+            value = 2048;
+        }
+        updateOutputLength(value);
+    });
 
     generateButton.addEventListener('click', function() {
         if (!isGenerating) {
@@ -22,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const memory = document.getElementById('memory').value;
             const storyContent = document.getElementById('story-editor').innerText;
             const systemInstruction = document.getElementById('system-instruction').value; // Get system instruction
+            
+            const temperature = parseFloat(temperatureInput.value); // Get temperature
+            const outputLength = parseFloat(outputLengthInput.value); // Get temperature
 
             const data = {
                 api_key: apiKey,
@@ -31,7 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 setting_description: settingDescription,
                 memory: memory,
                 story_content: storyContent,
-                system_instruction: systemInstruction // Add to data
+                system_instruction: systemInstruction,
+                temperature: temperature,
+                outputLength: outputLength
             };
 
             fetch('/generate', {
@@ -73,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error: ' + result.error);
                 } else {
                     const storyEditor = document.getElementById('story-editor');
-                    result.generated_text = result.generated_text.replace(/\n+/g, '\n');
-                    storyEditor.innerText += '' + result.generated_text;
+                    storyEditor.innerText = storyEditor.innerText.trim() + ' ' + result.generated_text;
+                    storyEditor.innerText = storyEditor.innerText.replace(/\n+/g, '\n');
                 }
             })
             .catch(error => {
