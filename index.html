@@ -69,30 +69,30 @@ Honestly no idea why would you use this now, but it's there."
             </div>
             <div class="form-group">
                 <details>
-                    <summary>System Instructions</summary>
+                    <summary title="The instructions for Gemini to generate the story. Change at your own risk.">System Instructions</summary>
                     <textarea id="system-instruction" name="system-instruction" placeholder="Enter system instructions here"></textarea>
                 </details>
             </div>
             <div class="form-group">
                 <details id="generation-parameters-details">
-                    <summary>Generation Parameters</summary>
+                    <summary title="Various parameters of the generation process">Generation Parameters</summary>
                     <div class="form-group">
-                        <label for="temperature-slider">Temperature: <span id="temperature-value">1.0</span></label>
+                        <label for="temperature-slider" title="Higher values make the model more creative and less focused, lower values make it more focused and less creative">Temperature: <span id="temperature-value">1.0</span></label>
                         <input type="range" id="temperature-slider" name="temperature-slider" min="0" max="2" step="0.01" value="1.0">
                         <input type="number" id="temperature-input" name="temperature-input" min="0" max="2" step="0.01" value="1.0">
                     </div>
                     <div class="form-group">
-                        <label for="output-length-slider">Max Output Length: <span id="output-length-value">1024</span></label>
+                        <label for="output-length-slider" title="The maximum length of the generated text">Max Output Length: <span id="output-length-value">1024</span></label>
                         <input type="range" id="output-length-slider" name="output-length-slider" min="100" max="2048" step="1" value="1024">
                         <input type="number" id="output-length-input" name="output-length-input" min="100" max="2048" value="1024">
                     </div>
                     <div class="form-group">
-                        <label for="top-p-slider">Top P: <span id="top-p-value">0.95</span></label>
+                        <label for="top-p-slider" title="A sampling parameter. Change at your own risk.">Top P: <span id="top-p-value">0.95</span></label>
                         <input type="range" id="top-p-slider" name="top-p-slider" min="0" max="1" step="0.01" value="0.95">
                         <input type="number" id="top-p-input" name="top-p-input" min="0" max="1" step="0.01" value="0.95">
                     </div>
                     <div class="form-group">
-                        <label for="top-k-slider">Top K: <span id="top-k-value">1</span></label>
+                        <label for="top-k-slider" title="A sampling parameter. Change at your own risk.">Top K: <span id="top-k-value">1</span></label>
                         <input type="range" id="top-k-slider" name="top-k-slider" min="0" max="1" step="1" value="1">
                         <input type="number" id="top-k-input" name="top-k-input" min="0" max="1" value="1">
                     </div>
