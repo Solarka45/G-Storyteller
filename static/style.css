@@ -29,6 +29,9 @@ body, html {
     padding: 14px;
     text-align: center;
     border-bottom: 1px solid #ddd; /* Lighter border */
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center items horizontally */
 }
 
 .service-title h1 {
@@ -37,6 +40,10 @@ body, html {
     font-weight: 600; /* Semibold */
     color: #2a6496; /* Futuristic blue */
     font-family: 'Eczar', serif; /* Set font to Eczar */
+}
+
+#service-logo {
+    max-height: 48px; /* Adjust the height as needed */
 }
 
 .story-list {
@@ -325,6 +332,14 @@ body.dark-theme .left-panel {
 
 body.dark-theme .service-title {
     border-bottom-color: #555;
+}
+
+body.dark-theme .service-title h1 {
+    color: #5191d2; /* Lighter blue */
+}
+
+body.dark-theme .story-panel h3 {
+    color: #74a7dd; /* Lighter blue */
 }
 
 body.dark-theme .center-section {

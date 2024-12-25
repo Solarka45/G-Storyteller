@@ -199,12 +199,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const lightModeRadio = document.getElementById('light-mode');
     const darkModeRadio = document.getElementById('dark-mode');
+    const serviceLogo = document.getElementById('service-logo');
 
     function applyTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
+            serviceLogo.src = 'static/img/logo_dark.webp';
         } else {
             document.body.classList.remove('dark-theme');
+            serviceLogo.src = 'static/img/logo_light.webp';
         }
     }
 
