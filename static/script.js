@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const generateButton = document.getElementById('generate-button');
     const spinner = document.getElementById('spinner');
+    const storyList = document.querySelector('.story-list');
 
     // Slider definitions
     const temperatureSlider = document.getElementById('temperature-slider');
@@ -116,6 +117,110 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to get all form data
+    function getFormData() {
+        const saveApiKey = document.getElementById('save-api-key').checked;
+        const apiKey = saveApiKey ? document.getElementById('api-key').value : ''; // Save API key only if checkbox is checked
+
+        return {
+            selected_model: document.getElementById('model-select').value,
+            story_title: document.getElementById('story-title').value,
+            story_tags: document.getElementById('story-tags').value,
+            additional_details: document.getElementById('additional-details').value,
+            plot_direction: document.getElementById('plot-direction').value,
+            story_content: document.getElementById('story-editor').innerHTML,
+            system_instruction: document.getElementById('system-instruction').value,
+            temperature: parseFloat(document.getElementById('temperature-input').value),
+            outputLength: parseFloat(document.getElementById('output-length-input').value),
+            top_p: parseFloat(document.getElementById('top-p-input').value),
+            top_k: parseInt(document.getElementById('top-k-input').value),
+            api_key: apiKey,
+            save_api_key: saveApiKey
+        };
+    }
+
+    // Function to set all form data
+    function setFormData(data) {
+        document.getElementById('model-select').value = data.selected_model;
+        document.getElementById('story-title').value = data.story_title;
+        document.getElementById('story-tags').value = data.story_tags;
+        document.getElementById('additional-details').value = data.additional_details;
+        document.getElementById('plot-direction').value = data.plot_direction;
+        document.getElementById('story-editor').innerHTML = data.story_content;
+        document.getElementById('system-instruction').value = data.system_instruction;
+        updateTemperature(data.temperature);
+        updateOutputLength(data.outputLength);
+        updateTopP(data.top_p);
+        updateTopK(data.top_k);
+        document.getElementById('save-api-key').checked = data.save_api_key;
+
+        // Only set API key if it was saved
+        if (data.save_api_key) {
+            document.getElementById('api-key').value = data.api_key;
+        }
+    }
+
+    // Function to save story data to localStorage
+    function saveStory(storyTitle, data) {
+        localStorage.setItem(storyTitle, JSON.stringify(data));
+        console.log(`Story "${storyTitle}" saved.`);
+        loadStoryList(); // Refresh the story list
+    }
+
+    // Function to load story data from localStorage
+    function loadStory(storyTitle) {
+        const data = JSON.parse(localStorage.getItem(storyTitle));
+        if (data) {
+            setFormData(data);
+            console.log(`Story "${storyTitle}" loaded.`);
+        } else {
+            console.error(`Story "${storyTitle}" not found.`);
+        }
+    }
+
+    // Function to delete a story from localStorage
+    function deleteStory(storyTitle) {
+        localStorage.removeItem(storyTitle);
+        console.log(`Story "${storyTitle}" deleted.`);
+        loadStoryList(); // Refresh the story list
+    }
+
+    // Function to load and display the list of saved stories
+    function loadStoryList() {
+        storyList.innerHTML = ''; // Clear the current list
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const storyTitle = localStorage.key(i);
+
+            // Skip if the key is 'api_key' or any other key not related to stories
+            if (storyTitle === 'api_key') continue;
+
+            const storyPanel = document.createElement('div');
+            storyPanel.classList.add('story-panel');
+            storyPanel.innerHTML = `
+                <h3>${storyTitle}</h3>
+                <button class="delete-button">Delete</button>
+            `;
+
+            storyPanel.addEventListener('click', function(event) {
+                if (event.target.classList.contains('delete-button')) {
+                    // Delete button clicked
+                    if (confirm(`Are you sure you want to delete the story "${storyTitle}"?`)) {
+                        deleteStory(storyTitle);
+                    }
+                } else {
+                    // Story panel clicked
+                    loadStory(storyTitle);
+                }
+            });
+
+            storyList.appendChild(storyPanel);
+        }
+    }
+
+    // Call loadStoryList on page load to display saved stories
+    loadStoryList();
+
     generateButton.addEventListener('click', function() {
         if (!isGenerating) {
             // Start generation
@@ -216,6 +321,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 isGenerating = false;
                 generateButton.innerHTML = 'Generate';
+
+                const storyTitle = document.getElementById('story-title').value;
+                const formData = getFormData();
+                saveStory(storyTitle, formData);
             });
         } else {
             // Cancel generation

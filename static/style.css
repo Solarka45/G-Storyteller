@@ -156,3 +156,25 @@ details[open] summary {
 #right-resizer {
     left: 0;
 }
+
+.story-panel {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.story-panel h3 {
+    margin: 0 0 5px 0;
+}
+
+.story-panel .delete-button {
+    float: right;
+    padding: 2px 5px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
