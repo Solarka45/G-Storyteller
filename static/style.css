@@ -6,7 +6,8 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+    background-color: #f8f8fa; /* Light background */
 }
 
 .container {
@@ -17,20 +18,25 @@ body, html {
 .left-panel {
     position: relative;
     width: 15%; /* Initial width */
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #ddd; /* Lighter border */
     overflow-y: auto;
     resize: horizontal;
+    background-color: #f8f8fa; /* Light background */
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .service-title {
-    padding: 15px;
+    padding: 14px;
     text-align: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd; /* Lighter border */
 }
 
 .service-title h1 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.8em; /* Slightly larger font */
+    font-weight: 600; /* Semibold */
+    color: #2a6496; /* Futuristic blue */
+    font-family: 'Eczar', serif; /* Set font to Eczar */
 }
 
 .story-list {
@@ -45,15 +51,19 @@ body, html {
 
 .title-section {
     padding: 10px 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd; /* Lighter border */
+    background-color: #f8f8fa; /* Light background */
 }
 
 .title-section .form-group {
     margin-bottom: 0;
 }
 
-.title-section label {
+.title-section input[type="text"] {
+    font-size: 24px; /* Larger font size */
     font-weight: bold;
+    font-family: 'Eczar', serif; /* Set font to Eczar */
+    padding: 5px 10px; /* Adjust padding */
 }
 
 .main-section {
@@ -65,11 +75,12 @@ body, html {
 .side-section {
     position: relative;
     width: 20%; /* Initial width */
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #ddd; /* Lighter border */
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f8f8fa;
     overflow-y: auto;
     resize: horizontal; /* Allow horizontal resizing */
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .form-group {
@@ -79,30 +90,35 @@ body, html {
 label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-weight: 600; /* Semibold */
+    font-family: 'Eczar', serif; /* Set font to Eczar */
 }
 
 #story-editor {
     width: 100%;
     height: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* Lighter border */
     padding: 10px;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6; /* Increased line height for readability */
     overflow-y: auto;
     resize: none;
-    background-color: #f9f9f9;
-    color: #000000;
+    background-color: #fff; /* White background */
+    color: #333; /* Darker text color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.05); /* Inset shadow */
+    font-family: 'Source Sans Pro', sans-serif; /* Set font to Source Sans Pro */
 }
 
 input[type="text"],
 input[type="password"],
 textarea {
     width: 100%;
-    padding: 8px;
+    padding: 10px; /* Increased padding */
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Increased font size */
 }
 
 textarea {
@@ -111,27 +127,44 @@ textarea {
 }
 
 #generate-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px 25px; /* Increased padding */
+    background-color: #2a6496; /* Futuristic blue */
     color: white;
+    font-family: 'Eczar', serif; /* Set font to Eczar */
     border: none;
-    border-radius: 4px;
+    border-radius: 25px; /* Pill-shaped button */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 #generate-button:hover {
-    background-color: #0056b3;
+    background-color: #1e4770; /* Darker blue on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
+}
+
+#generate-button:active {
+    transform: scale(0.95); /* Slight scale on click */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
 }
 
 details {
+    padding-left: 10px;
+    padding-right: 10px;
     margin-bottom: 15px; /* Add some spacing around the details section */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 summary {
     cursor: pointer; /* Make the summary look clickable */
-    font-weight: bold;
+    font-weight: 600; /* Semibold */
     outline: none; /* Remove default outline on focus in some browsers */
+    padding: 10px; /* Increased padding */
+    background-color: #f8f8fa; /* Light background */
+    font-family: 'Eczar', serif; /* Set font to Eczar */
 }
 
 /* Optional: Style the open/closed state */
@@ -142,9 +175,9 @@ details[open] summary {
 .resizer {
     position: absolute;
     top: 0;
-    width: 5px;
+    width: 6px; /* Slightly wider */
     height: 100%;
-    background-color: #ccc;
+    background-color: transparent;
     cursor: ew-resize;
     z-index: 10;
 }
@@ -157,24 +190,117 @@ details[open] summary {
     left: 0;
 }
 
+.resizer:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly visible on hover */
+}
+
 .story-panel {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* Lighter border */
     padding: 10px;
     margin-bottom: 5px;
     cursor: pointer;
+    background-color: #fff; /* White background */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+}
+
+.story-panel:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bigger shadow on hover */
 }
 
 .story-panel h3 {
     margin: 0 0 5px 0;
+    color: #2a6496; /* Futuristic blue */
 }
 
 .story-panel .delete-button {
     float: right;
-    padding: 2px 5px;
+    padding: 5px 10px; /* Increased padding */
     background-color: #dc3545;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px; /* Pill-shaped button */
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px; /* Slightly larger font */
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.story-panel .delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
+}
+
+.story-panel .delete-button:active {
+    transform: scale(0.95); /* Slight scale on click */
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
+}
+
+/* Add padding to elements inside details */
+details > *:not(summary) {
+    padding: 10px;
+}
+
+/* Update model selection dropdown font */
+#model-select {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    
+}
+
+/* Slider styles */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    outline: none;
+    border-radius: 15px;
+    margin-top: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #2a6496;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #2a6496;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Slider number input styles */
+.form-group input[type="number"] {
+    width: auto; /* Override default width */
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
