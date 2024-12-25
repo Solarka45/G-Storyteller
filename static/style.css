@@ -87,6 +87,14 @@ body, html {
     margin-bottom: 15px;
 }
 
+.form-group label {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-family: 'Eczar', serif;
+}
+
 label {
     display: block;
     margin-bottom: 5px;
@@ -165,7 +173,7 @@ summary {
     padding: 10px; /* Increased padding */
     background-color: #f8f8fa; /* Light background */
     font-family: 'Eczar', serif; /* Set font to Eczar */
-}
+}   
 
 /* Optional: Style the open/closed state */
 details[open] summary {
@@ -288,14 +296,13 @@ input[type="range"]::-moz-range-thumb:hover {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Slider number input styles */
 .form-group input[type="number"] {
-    width: auto; /* Override default width */
+    width: 55px; /* Reduced width */
     padding: 5px 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-    margin-left: 10px;
+    margin-left: 10px; /* Add margin-left */
     -moz-appearance: textfield; /* Firefox */
 }
 

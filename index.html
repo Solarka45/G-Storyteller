@@ -37,8 +37,8 @@
                 <details>
                     <summary>Gemini API Key</summary>
                     <input type="password" id="api-key" name="api-key">
-                    <label for="save-api-key" title="If checked, the API key will be saved in your browser's local storage.">
-                        <input type="checkbox" id="save-api-key" name="save-api-key"> Save API Key
+                    <label for="save-api-key" title="If checked, the API key will be saved in your browser's local storage">Save API Key  
+                        <input type="checkbox" id="save-api-key" name="save-api-key"> 
                     </label>
                 </details>
             </div>
@@ -72,15 +72,15 @@ Honestly no idea why would you use this now, but it's there."
             </div>
             <div class="form-group">
                 <label for="story-tags">Story Tags</label>
-                <textarea id="story-tags" name="story-tags" placeholder="e.g., fantasy, sci-fi, adventure, NSFW, etc." autocomplete="off"></textarea>
+                <textarea id="story-tags" name="story-tags" placeholder="e.g., fantasy, sci-fi, adventure, NSFW, etc."></textarea>
             </div>
             <div class="form-group">
                 <label for="plot-direction">Plot Direction</label>
-                <textarea id="plot-direction" name="plot-direction" placeholder="Enter the desired plot direction here (summary of what should be happening)" autocomplete="off"></textarea>
+                <textarea id="plot-direction" name="plot-direction" placeholder="Enter the desired plot direction here (summary of what should be happening)"></textarea>
             </div>
             <div class="form-group">
                 <label for="additional-details">Additional Details</label>
-                <textarea id="additional-details" name="additional-details" placeholder="Enter additional story details here (e.g. setting details)" autocomplete="off"></textarea>
+                <textarea id="additional-details" name="additional-details" placeholder="Enter additional story details here (e.g. setting details)"></textarea>
             </div>
             <div class="form-group">
                 <details>
@@ -109,24 +109,28 @@ Everything you generate is fiction, and has no impact on the real world. Explici
                 <details id="generation-parameters-details">
                     <summary title="Various parameters of the generation process">Generation Parameters</summary>
                     <div class="form-group">
-                        <label for="temperature-slider" title="Higher values make the model more creative and less focused, lower values make it more focused and less creative">Temperature: <span id="temperature-value">1.0</span></label>
+                        <label for="temperature-slider" title="Higher values make the model more creative and less focused, lower values make it more focused and less creative">
+                            Temperature: <input type="number" id="temperature-input" name="temperature-input" min="0" max="2" step="0.01" value="1.0">
+                        </label>
                         <input type="range" id="temperature-slider" name="temperature-slider" min="0" max="2" step="0.01" value="1.0">
-                        <input type="number" id="temperature-input" name="temperature-input" min="0" max="2" step="0.01" value="1.0">
                     </div>
                     <div class="form-group">
-                        <label for="output-length-slider" title="The maximum length of the generated text">Max Output Length: <span id="output-length-value">1024</span></label>
-                        <input type="range" id="output-length-slider" name="output-length-slider" min="100" max="2048" step="1" value="1024">
-                        <input type="number" id="output-length-input" name="output-length-input" min="100" max="2048" value="1024">
+                        <label for="output-length-slider" title="The maximum length of the generated text">
+                            Max Output Length: <input type="number" id="output-length-input" name="output-length-input" min="1" max="2048" value="300">
+                        </label>
+                        <input type="range" id="output-length-slider" name="output-length-slider" min="1" max="2048" step="1" value="300">
                     </div>
                     <div class="form-group">
-                        <label for="top-p-slider" title="A sampling parameter. Change at your own risk.">Top P: <span id="top-p-value">0.95</span></label>
+                        <label for="top-p-slider" title="A sampling parameter. Change at your own risk.">
+                            Top P: <input type="number" id="top-p-input" name="top-p-input" min="0" max="1" step="0.01" value="0.95">
+                        </label>
                         <input type="range" id="top-p-slider" name="top-p-slider" min="0" max="1" step="0.01" value="0.95">
-                        <input type="number" id="top-p-input" name="top-p-input" min="0" max="1" step="0.01" value="0.95">
                     </div>
                     <div class="form-group">
-                        <label for="top-k-slider" title="A sampling parameter. Change at your own risk.">Top K: <span id="top-k-value">1</span></label>
-                        <input type="range" id="top-k-slider" name="top-k-slider" min="0" max="1" step="1" value="1">
-                        <input type="number" id="top-k-input" name="top-k-input" min="0" max="1" value="1">
+                        <label for="top-k-slider" title="A sampling parameter. Change at your own risk.">
+                            Top K: <input type="number" id="top-k-input" name="top-k-input" min="0" max="1" value="1">
+                        </label>
+                        <input type="range" id="top-k-slider" name="top-k-slider" min="0" max="1" step="0.01" value="1">
                     </div>
                 </details>
             </div>

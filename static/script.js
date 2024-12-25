@@ -4,118 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const generateButton = document.getElementById('generate-button');
     const spinner = document.getElementById('spinner');
-    const storyList = document.querySelector('.story-list');
+    const storyList = document.querySelector('.story-list'); // Get the story list container
 
     // Slider definitions
     const temperatureSlider = document.getElementById('temperature-slider');
-    const temperatureValue = document.getElementById('temperature-value');
     const temperatureInput = document.getElementById('temperature-input');
     const outputLengthSlider = document.getElementById('output-length-slider');
-    const outputLengthValue = document.getElementById('output-length-value');
     const outputLengthInput = document.getElementById('output-length-input');
     const topPSlider = document.getElementById('top-p-slider');
-    const topPValue = document.getElementById('top-p-value');
     const topPInput = document.getElementById('top-p-input');
     const topKSlider = document.getElementById('top-k-slider');
-    const topKValue = document.getElementById('top-k-value');
     const topKInput = document.getElementById('top-k-input');
-
-    function updateTemperature(value) {
-        temperatureValue.textContent = value;
-        temperatureSlider.value = value;
-        temperatureInput.value = value;
-    }
-    function updateOutputLength(value) {
-        outputLengthValue.textContent = value;
-        outputLengthSlider.value = value;
-        outputLengthInput.value = value;
-    }
-    function updateTopP(value) {
-        topPValue.textContent = value;
-        topPSlider.value = value;
-        topPInput.value = value;
-    }
-    function updateTopK(value) {
-        topKValue.textContent = value;
-        topKSlider.value = value;
-        topKInput.value = value;
-    }
-
-    // Update temperature when the slider is moved
-    temperatureSlider.addEventListener('input', function() {
-        updateTemperature(temperatureSlider.value);
-    });
-    // Update temperature when the number input is changed
-    temperatureInput.addEventListener('input', function() {
-        let value = parseFloat(temperatureInput.value);
-        if (isNaN(value) || value < 0) {
-            value = 0;
-        } else if (value > 2) {
-            value = 2;
-        }
-        updateTemperature(value);
-    });
-
-    // Update output length when the slider is moved
-    outputLengthSlider.addEventListener('input', function() {
-        updateOutputLength(outputLengthSlider.value);
-    });
-    // Update output length when the number input is changed
-    outputLengthInput.addEventListener('input', function() {
-        let value = parseInt(outputLengthInput.value);
-        if (isNaN(value) || value < 100) {
-            value = 100;
-        } else if (value > 2048) {
-            value = 2048;
-        }
-        updateOutputLength(value);
-    });
-
-    // Update top_p when the slider is moved
-    topPSlider.addEventListener('input', function() {
-        updateTopP(topPSlider.value);
-    });
-    // Update top_p when the number input is changed
-    topPInput.addEventListener('input', function() {
-        let value = parseFloat(topPInput.value);
-        if (isNaN(value) || value < 0) {
-            value = 0;
-        } else if (value > 1) {
-            value = 1;
-        }
-        updateTopP(value);
-    });
-
-    // Update top_k when the slider is moved
-    topKSlider.addEventListener('input', function() {
-        updateTopK(topKSlider.value);
-    });
-    // Update top_k when the number input is changed
-    topKInput.addEventListener('input', function() {
-        let value = parseInt(topKInput.value);
-        if (isNaN(value) || value < 0) {
-            value = 0;
-        } else if (value > 1) {
-            value = 1;
-        }
-        updateTopK(value);
-    });
-
-    // Function to convert innerText to HTML with <br> tags for newlines and spans for color
-    function convertTextToHtml(text, color = 'black') {
-        // Replace newlines with <br> tags
-        text = text.replace(/\n+/g, '<br>');
-        // Wrap the entire text in a span with the specified color
-        return `<span style="color: ${color};">${text}</span>`;
-    }
-
-    // Function to reset the color of previously generated text to black
-    function resetPreviousTextColors(storyEditor) {
-        const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"]');
-        spans.forEach(span => {
-            span.style.color = 'black';
-        });
-    }
 
     // Function to get all form data
     function getFormData() {
@@ -130,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
             plot_direction: document.getElementById('plot-direction').value,
             story_content: document.getElementById('story-editor').innerHTML,
             system_instruction: document.getElementById('system-instruction').value,
-            temperature: parseFloat(document.getElementById('temperature-input').value),
-            outputLength: parseFloat(document.getElementById('output-length-input').value),
-            top_p: parseFloat(document.getElementById('top-p-input').value),
-            top_k: parseInt(document.getElementById('top-k-input').value),
+            temperature: parseFloat(temperatureInput.value),
+            outputLength: parseFloat(outputLengthInput.value),
+            top_p: parseFloat(topPInput.value),
+            top_k: parseInt(topKInput.value),
             api_key: apiKey,
             save_api_key: saveApiKey
         };
@@ -218,6 +117,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function updateTemperature(value) {
+        temperatureInput.value = value;
+        temperatureSlider.value = value;
+    }
+    function updateOutputLength(value) {
+        outputLengthInput.value = value;
+        outputLengthSlider.value = value;
+    }
+    function updateTopP(value) {
+        topPInput.value = value;
+        topPSlider.value = value;
+    }
+    function updateTopK(value) {
+        topKInput.value = value;
+        topKSlider.value = value;
+    }
+
+    // Update temperature when the slider is moved
+    temperatureSlider.addEventListener('input', function() {
+        updateTemperature(temperatureSlider.value);
+    });
+    // Update temperature when the number input is changed
+    temperatureInput.addEventListener('input', function() {
+        let value = parseFloat(temperatureInput.value);
+        if (isNaN(value) || value < 0) {
+            value = 0;
+        } else if (value > 2) {
+            value = 2;
+        }
+        updateTemperature(value);
+    });
+
+    // Update output length when the slider is moved
+    outputLengthSlider.addEventListener('input', function() {
+        updateOutputLength(outputLengthSlider.value);
+    });
+    // Update output length when the number input is changed
+    outputLengthInput.addEventListener('input', function() {
+        let value = parseInt(outputLengthInput.value);
+        if (isNaN(value) || value < 1) {
+            value = 1;
+        } else if (value > 2048) {
+            value = 2048;
+        }
+        updateOutputLength(value);
+    });
+
+    // Update top_p when the slider is moved
+    topPSlider.addEventListener('input', function() {
+        updateTopP(topPSlider.value);
+    });
+    // Update top_p when the number input is changed
+    topPInput.addEventListener('input', function() {
+        let value = parseFloat(topPInput.value);
+        if (isNaN(value) || value < 0) {
+            value = 0;
+        } else if (value > 1) {
+            value = 1;
+        }
+        updateTopP(value);
+    });
+
+    // Update top_k when the slider is moved
+    topKSlider.addEventListener('input', function() {
+        updateTopK(topKSlider.value);
+    });
+    // Update top_k when the number input is changed
+    topKInput.addEventListener('input', function() {
+        let value = parseInt(topKInput.value);
+        if (isNaN(value) || value < 0) {
+            value = 0;
+        } else if (value > 1) {
+            value = 1;
+        }
+        updateTopK(value);
+    });
+
     // Call loadStoryList on page load to display saved stories
     loadStoryList();
 
@@ -230,14 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             generateButton.innerHTML = 'Cancel <span id="spinner" style="display: inline;"><img src="static/spinner.svg" alt="Loading..." style="width: 20px; height: 20px;"></span>';
 
-            const apiKey = document.getElementById('api-key').value;
-            const selectedModel = document.getElementById('model-select').value;
-            const storyTitle = document.getElementById('story-title').value;
-            const storyTags = document.getElementById('story-tags').value;
-            const additionalDetails = document.getElementById('additional-details').value;
-            const plotDirection = document.getElementById('plot-direction').value;
-            const storyContent = document.getElementById('story-editor').innerText;
-            const systemInstruction = document.getElementById('system-instruction').value;
+            const formData = getFormData();
             
             const temperature = parseFloat(temperatureInput.value);
             const outputLength = parseFloat(outputLengthInput.value);
@@ -245,14 +214,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const topK = parseInt(topKInput.value);
 
             const data = {
-                api_key: apiKey,
-                selected_model: selectedModel,
-                story_title: storyTitle,
-                story_tags: storyTags,
-                additional_details: additionalDetails,
-                plot_direction: plotDirection,
-                story_content: storyContent,
-                system_instruction: systemInstruction,
+                api_key: formData.api_key,
+                selected_model: formData.selected_model,
+                story_title: formData.story_title,
+                story_tags: formData.story_tags,
+                additional_details: formData.additional_details,
+                plot_direction: formData.plot_direction,
+                story_content: formData.story_content,
+                system_instruction: formData.system_instruction,
                 temperature: temperature,
                 outputLength: outputLength,
                 top_p: topP,
@@ -321,11 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 isGenerating = false;
                 generateButton.innerHTML = 'Generate';
-
-                const storyTitle = document.getElementById('story-title').value;
-                const formData = getFormData();
-                saveStory(storyTitle, formData);
             });
+
+            // Save the story after generation
+            saveStory(formData.story_title, formData);
         } else {
             // Cancel generation
             controller.abort();
@@ -363,6 +331,22 @@ document.addEventListener('DOMContentLoaded', function() {
             generateButton.click();
         }
     });
+
+    // Function to convert innerText to HTML with <br> tags for newlines and spans for color
+    function convertTextToHtml(text, color = 'black') {
+        // Replace newlines with <br> tags
+        text = text.replace(/\n+/g, '<br>');
+        // Wrap the entire text in a span with the specified color
+        return `<span style="color: ${color};">${text}</span>`;
+    }
+
+    // Function to reset the color of previously generated text to black
+    function resetPreviousTextColors(storyEditor) {
+        const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"]');
+        spans.forEach(span => {
+            span.style.color = 'black';
+        });
+    }
 
     // Resizer logic
     const leftResizer = document.getElementById('left-resizer');
