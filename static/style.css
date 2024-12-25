@@ -67,7 +67,7 @@ label {
     overflow-y: auto;
     resize: none;
     background-color: #f9f9f9;
-    color: #333;
+    color: #000000;
 }
 
 input[type="text"],

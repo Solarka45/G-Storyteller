@@ -100,15 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTopK(value);
     });
 
-    // Function to remove excess whitespace and newlines from innerText
-    function cleanTextForHtml(text) {
-        // Trim leading and trailing spaces and newlines
-        text = text.trim();
-        // Replace multiple spaces with a single space
-        text = text.replace(/ +/g, ' ');
-        return text;
-    }
-
     // Function to convert innerText to HTML with <br> tags for newlines and spans for color
     function convertTextToHtml(text, color = 'black') {
         // Replace newlines with <br> tags
@@ -205,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Reset color of previously generated text
                     resetPreviousTextColors(storyEditor);
                     // Clean the existing text while preserving newlines
-                    let cleanedExistingText = cleanTextForHtml(storyEditor.innerText);
+                    let cleanedExistingText = storyEditor.innerText.replace(/ +/g, ' ');
                     // Convert the cleaned existing text to HTML with spans for color
                     let existingHtml = convertTextToHtml(cleanedExistingText);
                     // Convert the new generated text to HTML with spans for color
