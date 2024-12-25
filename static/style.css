@@ -66,6 +66,20 @@ textarea {
     min-height: 100px;
 }
 
+details {
+    margin-bottom: 15px; /* Add some spacing around the details section */
+}
+
+summary {
+    cursor: pointer; /* Make the summary look clickable */
+    font-weight: bold;
+    outline: none; /* Remove default outline on focus in some browsers */
+}
+
+details[open] summary {
+    margin-bottom: 10px; /* Add spacing when open */
+}
+
 #generate-button {
     padding: 10px 20px;
     background-color: #007bff;
