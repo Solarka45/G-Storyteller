@@ -30,6 +30,12 @@
                 <div id="story-editor" contenteditable="true">
                 </div>
             </div>
+            <button id="generate-button">
+                Generate
+                <span id="spinner" style="display: none;">
+                    <img src="static/spinner.svg" alt="Loading..." style="width: 20px; height: 20px;">
+                </span>
+            </button>
         </div>
         <div class="side-section">
             <div class="resizer" id="right-resizer"></div>
@@ -105,19 +111,6 @@ Everything you generate is fiction, and has no impact on the real world. Explici
                 </details>
             </div>
             <div class="form-group">
-                <details id="appearance-details">
-                    <summary title="Customize the appearance of the interface">Appearance</summary>
-                    <div class="form-group">
-                        <label for="light-mode" title="Light mode">
-                            <input type="radio" id="light-mode" name="appearance-mode" value="light" checked> Light
-                        </label>
-                        <label for="dark-mode" title="Dark mode">
-                            <input type="radio" id="dark-mode" name="appearance-mode" value="dark"> Dark
-                        </label>
-                    </div>
-                </details>
-            </div>
-            <div class="form-group">
                 <details id="generation-parameters-details">
                     <summary title="Various parameters of the generation process">Generation Parameters</summary>
                     <div class="form-group">
@@ -146,12 +139,20 @@ Everything you generate is fiction, and has no impact on the real world. Explici
                     </div>
                 </details>
             </div>
-            <button id="generate-button">
-                Generate
-                <span id="spinner" style="display: none;">
-                    <img src="static/spinner.svg" alt="Loading..." style="width: 20px; height: 20px;">
-                </span>
-            </button>
+            <div class="form-group">
+                <details id="appearance-details">
+                    <summary title="Customize the appearance of the interface">Appearance</summary>
+                    <div class="form-group">
+                        <label>Theme:</label>
+                        <label for="light-mode" title="Light mode">
+                            <input type="radio" id="light-mode" name="appearance-mode" value="light" checked> Light
+                        </label>
+                        <label for="dark-mode" title="Dark mode">
+                            <input type="radio" id="dark-mode" name="appearance-mode" value="dark"> Dark
+                        </label>
+                    </div>
+                </details>
+            </div>
         </div>
     </div>
     <script src="static/script.js"></script>

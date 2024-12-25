@@ -106,6 +106,8 @@ def generate():
         plot_direction = "Up to you"
     if (data.get('story_content') == ""):
         data['story_content'] = "Begin the story youself."
+    if (system_instruction == ""):
+        system_instruction = "Continue this story."
 
     model = genai.GenerativeModel(model_name=selected_model,
                                   generation_config=generation_config,

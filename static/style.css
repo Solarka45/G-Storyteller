@@ -38,7 +38,7 @@ body, html {
     margin: 0;
     font-size: 1.8em; /* Slightly larger font */
     font-weight: 600; /* Semibold */
-    color: #2a6496; /* Futuristic blue */
+    color: black; /* Futuristic blue */
     font-family: 'Eczar', serif; /* Set font to Eczar */
 }
 
@@ -152,6 +152,8 @@ textarea {
     font-size: 18px; /* Increased font size */
     transition: all 0.2s ease-in-out; /* Smooth transition */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 97%; /* Set width to nearly 100% */
+    margin: 0 auto 20px auto; /* Center the button */
 }
 
 #generate-button:hover {
@@ -226,7 +228,7 @@ details[open] summary {
 
 .story-panel h3 {
     margin: 0 0 5px 0;
-    color: #2a6496; /* Futuristic blue */
+    color: black; /* Futuristic blue */
 }
 
 .story-panel .delete-button {
@@ -335,11 +337,11 @@ body.dark-theme .service-title {
 }
 
 body.dark-theme .service-title h1 {
-    color: #5191d2; /* Lighter blue */
+    color: whitesmoke;
 }
 
 body.dark-theme .story-panel h3 {
-    color: #74a7dd; /* Lighter blue */
+    color: whitesmoke;
 }
 
 body.dark-theme .center-section {
@@ -392,10 +394,6 @@ body.dark-theme .story-panel {
     background-color: #333;
     color: #eee;
     border-color: #555;
-}
-
-body.dark-theme .story-panel h3 {
-    color: #2a6496;
 }
 
 body.dark-theme .resizer:hover {
