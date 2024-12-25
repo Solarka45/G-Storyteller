@@ -8,7 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="left-section">
+        <div class="left-panel">
+            <div class="resizer" id="left-resizer"></div>
+            <div class="service-title">
+                <h1>G Storyteller</h1>
+            </div>
+            <div class="story-list">
+                <!-- Placeholder for the list of user's stories -->
+                <p>Story list will go here.</p>
+            </div>
+        </div>
+        <div class="center-section">
             <div class="title-section">
                 <div class="form-group">
                     <input type="text" id="story-title" name="story-title" placeholder="Story Title">
@@ -21,11 +31,14 @@
             </div>
         </div>
         <div class="side-section">
-            <div class="resizer" id="resizer"></div>
+            <div class="resizer" id="right-resizer"></div>
             <div class="form-group">
                 <details>
                     <summary>Gemini API Key</summary>
                     <input type="password" id="api-key" name="api-key">
+                    <label for="save-api-key" title="If checked, the API key will be saved in your browser's local storage.">
+                        <input type="checkbox" id="save-api-key" name="save-api-key"> Save API Key
+                    </label>
                 </details>
             </div>
             <div class="form-group">

@@ -14,10 +14,33 @@ body, html {
     height: 100%;
 }
 
-.left-section {
+.left-panel {
+    position: relative;
+    width: 15%; /* Initial width */
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    resize: horizontal;
+}
+
+.service-title {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.service-title h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.story-list {
+    padding: 10px;
+}
+
+.center-section {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%; /* Initial width */
 }
 
 .title-section {
@@ -41,7 +64,7 @@ body, html {
 
 .side-section {
     position: relative;
-    flex: 30%; /* Occupies 30% of the width */
+    width: 20%; /* Initial width */
     border-left: 1px solid #ccc;
     padding: 20px;
     background-color: #f0f0f0;
@@ -118,11 +141,18 @@ details[open] summary {
 
 .resizer {
     position: absolute;
-    left: 0;
     top: 0;
     width: 5px;
     height: 100%;
     background-color: #ccc;
     cursor: ew-resize;
     z-index: 10;
+}
+
+#left-resizer {
+    right: 0;
+}
+
+#right-resizer {
+    left: 0;
 }

@@ -256,35 +256,67 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Resizer logic
-    const resizer = document.getElementById('resizer');
-    const leftSection = document.querySelector('.left-section');
+    const leftResizer = document.getElementById('left-resizer');
+    const rightResizer = document.getElementById('right-resizer');
+    const leftPanel = document.querySelector('.left-panel');
+    const centerSection = document.querySelector('.center-section');
     const sideSection = document.querySelector('.side-section');
 
-    let isResizing = false;
+    let isResizingLeft = false;
+    let isResizingRight = false;
 
-    resizer.addEventListener('mousedown', function(e) {
+    leftResizer.addEventListener('mousedown', function(e) {
         e.preventDefault();
-        isResizing = true;
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
+        isResizingLeft = true;
+        document.addEventListener('mousemove', handleLeftMouseMove);
+        document.addEventListener('mouseup', handleLeftMouseUp);
     });
 
-    function handleMouseMove(e) {
-        if (!isResizing) return;
-        const containerOffsetLeft = leftSection.offsetLeft;
-        const pointerRelativeXpos = e.clientX - containerOffsetLeft;
-        const leftSectionWidth = pointerRelativeXpos;
-        const sideSectionWidth = leftSection.parentElement.clientWidth - leftSectionWidth;
+    rightResizer.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        isResizingRight = true;
+        document.addEventListener('mousemove', handleRightMouseMove);
+        document.addEventListener('mouseup', handleRightMouseUp);
+    });
 
-        leftSection.style.width = `${leftSectionWidth}px`;
+    function handleLeftMouseMove(e) {
+        if (!isResizingLeft) return;
+        const containerOffsetLeft = leftPanel.offsetLeft;
+        const pointerRelativeXpos = e.clientX - containerOffsetLeft;
+        const leftPanelWidth = pointerRelativeXpos;
+        const centerSectionWidth = (window.innerWidth - leftPanelWidth) * 0.7;
+        const sideSectionWidth = (window.innerWidth - leftPanelWidth) * 0.3;
+
+        leftPanel.style.width = `${leftPanelWidth}px`;
+        centerSection.style.width = `${centerSectionWidth}px`;
         sideSection.style.width = `${sideSectionWidth}px`;
-        leftSection.style.flex = 'none';
+        leftPanel.style.flex = 'none';
+        centerSection.style.flex = 'none';
         sideSection.style.flex = 'none';
     }
 
-    function handleMouseUp() {
-        isResizing = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
+    function handleRightMouseMove(e) {
+        if (!isResizingRight) return;
+        const centerSectionOffsetRight = centerSection.offsetLeft + centerSection.offsetWidth;
+        const pointerRelativeXpos = e.clientX;
+        const sideSectionWidth = window.innerWidth - pointerRelativeXpos;
+        const centerSectionWidth = pointerRelativeXpos - centerSection.offsetLeft;
+
+        centerSection.style.width = `${centerSectionWidth}px`;
+        sideSection.style.width = `${sideSectionWidth}px`;
+        centerSection.style.flex = 'none';
+        sideSection.style.flex = 'none';
+    }
+
+    function handleLeftMouseUp() {
+        isResizingLeft = false;
+        document.removeEventListener('mousemove', handleLeftMouseMove);
+        document.removeEventListener('mouseup', handleLeftMouseUp);
+    }
+
+    function handleRightMouseUp() {
+        isResizingRight = false;
+        document.removeEventListener('mousemove', handleRightMouseMove);
+        document.removeEventListener('mouseup', handleRightMouseUp);
     }
 });
