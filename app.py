@@ -26,6 +26,9 @@ def generate():
     selected_model = data.get('selected_model')
     temperature = data.get('temperature')
     outputLength = data.get('outputLength')
+    top_p = data.get('top_p')
+    top_k = data.get('top_k')
+
     additional_details = data.get('additional_details')
     plot_direction = data.get('plot_direction')
 
@@ -42,8 +45,8 @@ def generate():
     # Set up the model
     generation_config = {
         "temperature": temperature,
-        "top_p": 1,
-        "top_k": 1,
+        "top_p": top_p,
+        "top_k": top_k,
         "max_output_tokens": outputLength,
     }
 
