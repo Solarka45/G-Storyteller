@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template, session, abort
 import os
 import markdown
 import secrets
+from pathlib import Path
 
 app = Flask(__name__, static_folder='static', template_folder='.')
 
@@ -12,6 +13,30 @@ app.secret_key = secrets.token_hex(16)
 def is_valid_api_key(api_key):
     return api_key is not None and len(api_key) > 0  # Replace with actual API key validation
 
+# Function to get API key from file or form data
+def get_api_key():
+    api_key = None
+    # Get the path to the user's Documents folder
+    documents_path = str(Path.home() / "Documents")
+    api_key_file_path = os.path.join(documents_path, 'api_key.txt')
+
+    # Try to read API key from file
+    if os.path.exists(api_key_file_path):
+        try:
+            with open(api_key_file_path, 'r') as f:
+                api_key = f.read().strip()
+                print("API key loaded from api_key.txt")  # Indicate that the key was loaded from the file
+        except Exception as e:
+            print(f"Error reading API key from file: {e}")
+
+    # If API key is not found in the file, try to get it from the request data (if available)
+    if not api_key:
+        data = request.get_json()
+        if data and 'api_key' in data:
+            api_key = data.get('api_key')
+
+    return api_key
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,15 +44,14 @@ def index():
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.get_json()
-    #api_key = data.get('api_key')
-    api_key = "AIzaSyBAGd1Qb1z3Fc8hwPhc25WpDblrZDfAndA"
-    #system_instruction = data.get('system_instruction')
-    system_instruction = "You are a storywriter. You will continue the provided story. Do not repeat what was entered before unless it makes sense from narrative perspective."
+    api_key = get_api_key()  # Use the get_api_key() function
     selected_model = data.get('selected_model')
     temperature = data.get('temperature')
     outputLength = data.get('outputLength')
     top_p = data.get('top_p')
     top_k = data.get('top_k')
+
+    system_instruction = data.get('system_instruction')
 
     story_title = data.get('story_title')
     story_tags = data.get('story_tags')
