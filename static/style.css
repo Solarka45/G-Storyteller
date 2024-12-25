@@ -229,6 +229,7 @@ details[open] summary {
 .story-panel h3 {
     margin: 0 0 5px 0;
     color: black; /* Futuristic blue */
+    font-family: 'Eczar', serif;
 }
 
 .story-panel .delete-button {

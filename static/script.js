@@ -87,36 +87,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to load and display the list of saved stories
     function loadStoryList() {
         storyList.innerHTML = ''; // Clear the current list
-
+    
         for (let i = 0; i < localStorage.length; i++) {
-            const storyTitle = localStorage.key(i);
-
-            // Skip if the key is 'api_key' or any other key not related to stories
-            if (storyTitle === 'api_key') continue;
-
-            const storyPanel = document.createElement('div');
-            storyPanel.classList.add('story-panel');
-            storyPanel.innerHTML = `
-                <h3>${storyTitle}</h3>
-                <button class="delete-button">Delete</button>
-            `;
-
-            storyPanel.addEventListener('click', function(event) {
-                if (event.target.classList.contains('delete-button')) {
-                    // Delete button clicked
-                    if (confirm(`Are you sure you want to delete the story "${storyTitle}"?`)) {
-                        deleteStory(storyTitle);
+            const key = localStorage.key(i);
+    
+            // Check if the key belongs to a story (not appearance settings or other items)
+            if (key !== 'appearanceSettings' && key !== 'api_key') {
+                const storyTitle = key; // Key is the story title
+                const storyPanel = document.createElement('div');
+                storyPanel.classList.add('story-panel');
+                storyPanel.innerHTML = `
+                    <h3>${storyTitle}</h3>
+                    <button class="delete-button">Delete</button>
+                `;
+    
+                storyPanel.addEventListener('click', function(event) {
+                    if (event.target.classList.contains('delete-button')) {
+                        // Delete button clicked
+                        if (confirm(`Are you sure you want to delete the story "${storyTitle}"?`)) {
+                            deleteStory(storyTitle);
+                        }
+                    } else {
+                        // Story panel clicked
+                        loadStory(storyTitle);
                     }
-                } else {
-                    // Story panel clicked
-                    loadStory(storyTitle);
-                }
-            });
-
-            storyList.appendChild(storyPanel);
+                });
+    
+                storyList.appendChild(storyPanel);
+            }
         }
     }
 
+    // SLIDER SETTINGS
     function updateTemperature(value) {
         temperatureInput.value = value;
         temperatureSlider.value = value;
@@ -197,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call loadStoryList on page load to display saved stories
     loadStoryList();
 
+    // APPEARANCE SETTINGS
     const lightModeRadio = document.getElementById('light-mode');
     const darkModeRadio = document.getElementById('dark-mode');
     const serviceLogo = document.getElementById('service-logo');
@@ -211,8 +214,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    lightModeRadio.addEventListener('change', () => applyTheme('light'));
-    darkModeRadio.addEventListener('change', () => applyTheme('dark'));
+    // Function to save appearance settings to localStorage
+    function saveAppearanceSettings() {
+        const settings = {
+            theme: lightModeRadio.checked ? 'light' : 'dark',
+        };
+        localStorage.setItem('appearanceSettings', JSON.stringify(settings));
+        console.log('Appearance settings saved.');
+    }
+
+    // Function to load appearance settings from localStorage
+    function loadAppearanceSettings() {
+        const settings = JSON.parse(localStorage.getItem('appearanceSettings'));
+        if (settings) {
+            // Correctly set the checked property based on the loaded theme
+            if (settings.theme === 'dark') {
+                darkModeRadio.checked = true;
+                lightModeRadio.checked = false; // Uncheck the other radio
+            } else {
+                lightModeRadio.checked = true;
+                darkModeRadio.checked = false; // Uncheck the other radio
+            }
+            applyTheme(settings.theme);
+            // Load other appearance settings here when needed
+        }
+    }
+
+    // Event listeners for appearance settings
+    lightModeRadio.addEventListener('change', () => {
+        applyTheme('light');
+        saveAppearanceSettings();
+    });
+    darkModeRadio.addEventListener('change', () => {
+        applyTheme('dark');
+        saveAppearanceSettings();
+    });
+
+    // Load appearance settings on page load
+    loadAppearanceSettings();
 
     generateButton.addEventListener('click', function() {
         if (!isGenerating) {
