@@ -100,6 +100,31 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTopK(value);
     });
 
+    // Function to remove excess whitespace and newlines from innerText
+    function cleanTextForHtml(text) {
+        // Trim leading and trailing spaces and newlines
+        text = text.trim();
+        // Replace multiple spaces with a single space
+        text = text.replace(/ +/g, ' ');
+        return text;
+    }
+
+    // Function to convert innerText to HTML with <br> tags for newlines and spans for color
+    function convertTextToHtml(text, color = 'black') {
+        // Replace newlines with <br> tags
+        text = text.replace(/\n+/g, '<br>');
+        // Wrap the entire text in a span with the specified color
+        return `<span style="color: ${color};">${text}</span>`;
+    }
+
+    // Function to reset the color of previously generated text to black
+    function resetPreviousTextColors(storyEditor) {
+        const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"]');
+        spans.forEach(span => {
+            span.style.color = 'black';
+        });
+    }
+
     generateButton.addEventListener('click', function() {
         if (!isGenerating) {
             // Start generation
@@ -177,8 +202,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error: ' + result.error);
                 } else {
                     const storyEditor = document.getElementById('story-editor');
-                    storyEditor.innerText = storyEditor.innerText.trim() + ' ' + result.generated_text;
-                    storyEditor.innerText = storyEditor.innerText.replace(/\n+/g, '\n');
+                    // Reset color of previously generated text
+                    resetPreviousTextColors(storyEditor);
+                    // Clean the existing text while preserving newlines
+                    let cleanedExistingText = cleanTextForHtml(storyEditor.innerText);
+                    // Convert the cleaned existing text to HTML with spans for color
+                    let existingHtml = convertTextToHtml(cleanedExistingText);
+                    // Convert the new generated text to HTML with spans for color
+                    let newHtml = convertTextToHtml(result.generated_text, 'darkmagenta');
+                    // Combine the cleaned existing HTML with the new HTML
+                    storyEditor.innerHTML = existingHtml + (existingHtml.endsWith('<br>') || existingHtml === '' ? '' : ' ') + newHtml;
                 }
             })
             .catch(error => {

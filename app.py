@@ -80,6 +80,8 @@ def generate():
         additional_details = "No Additional Details"
     if (plot_direction == ""):
         plot_direction = "Up to you"
+    if (data.get('story_content') == ""):
+        data['story_content'] = "Begin the story youself."
 
     model = genai.GenerativeModel(model_name=selected_model,
                                   generation_config=generation_config,
