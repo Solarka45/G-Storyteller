@@ -40,11 +40,13 @@ body, html {
 }
 
 .side-section {
+    position: relative;
     flex: 30%; /* Occupies 30% of the width */
     border-left: 1px solid #ccc;
     padding: 20px;
     background-color: #f0f0f0;
     overflow-y: auto;
+    resize: horizontal; /* Allow horizontal resizing */
 }
 
 .form-group {
@@ -112,4 +114,15 @@ summary {
 /* Optional: Style the open/closed state */
 details[open] summary {
     margin-bottom: 10px; /* Add spacing when open */
+}
+
+.resizer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #ccc;
+    cursor: ew-resize;
+    z-index: 10;
 }
