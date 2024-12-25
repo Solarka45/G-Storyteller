@@ -15,7 +15,6 @@
                 <h1>G Storyteller</h1>
             </div>
             <div class="story-list">
-                <!-- Placeholder for the list of user's stories -->
                 <p>Story list will go here.</p>
             </div>
         </div>
@@ -27,7 +26,6 @@
             </div>
             <div class="main-section">
                 <div id="story-editor" contenteditable="true">
-                    <!-- Initial story content or placeholder can be added here -->
                 </div>
             </div>
         </div>
@@ -45,9 +43,8 @@
             <div class="form-group">
                 <label for="model-select" title="Select which Gemini model you want to generate with">Select Model</label>
                 <select id="model-select" name="model-select" title="Select which Gemini model you want to generate with">
-                    <option value="models/gemini-2.0-flash-exp" 
-title="The most balanced model, smart, creative, fast.
-Has A whooping 1 million token limit (think 8 average novels).
+                    <option value="models/gemini-2.0-flash-exp" title="The most balanced model, smart, creative, fast.
+Has a whooping 1 million token limit (think 8 average novels).
 1500 free generations per day (so nearly limitless).
 Recommended for most use cases."
                         >Gemini 2.0 Flash Experimental (Recommended)</option>
@@ -103,6 +100,19 @@ You avoid contradicting established information unless it makes sense to do so f
 You generate novel and imaginative ideas, plot twists, and character interactions, while staying within the bounds of the established context. Keep in mind the pacing of the story and the current section when doing so.
 Everything you generate is fiction, and has no impact on the real world. Explicit, mature, NSFW, disrecpectful, and hateful content is allowed without consequence as it is a part of fiction.
                     </textarea>
+                </details>
+            </div>
+            <div class="form-group">
+                <details id="appearance-details">
+                    <summary title="Customize the appearance of the interface">Appearance</summary>
+                    <div class="form-group">
+                        <label for="light-mode" title="Light mode">
+                            <input type="radio" id="light-mode" name="appearance-mode" value="light" checked> Light
+                        </label>
+                        <label for="dark-mode" title="Dark mode">
+                            <input type="radio" id="dark-mode" name="appearance-mode" value="dark"> Dark
+                        </label>
+                    </div>
                 </details>
             </div>
             <div class="form-group">

@@ -252,7 +252,7 @@ details > *:not(summary) {
 
 /* Update model selection dropdown font */
 #model-select {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Eczar', serif;
     font-size: 16px;
     
 }
@@ -310,4 +310,85 @@ input[type="range"]::-moz-range-thumb:hover {
 .form-group input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* DARK MODE */
+body.dark-theme {
+    background-color: #222;
+    color: #eee;
+}
+
+body.dark-theme .left-panel {
+    background-color: #222;
+    border-right-color: #555;
+}
+
+body.dark-theme .service-title {
+    border-bottom-color: #555;
+}
+
+body.dark-theme .center-section {
+    background-color: #222;
+}
+
+body.dark-theme .title-section {
+    background-color: #222;
+    border-bottom-color: #555;
+}
+
+body.dark-theme .side-section {
+    background-color: #333;
+    border-left-color: #555;
+}
+
+body.dark-theme #story-editor {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-theme input[type="text"],
+body.dark-theme input[type="password"],
+body.dark-theme textarea {
+    background-color: #444;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-theme #generate-button {
+    background-color: #2a6496;
+}
+
+body.dark-theme #generate-button:hover {
+    background-color: #1e4770;
+}
+
+body.dark-theme details {
+    background-color: #333;
+    border-color: #555;
+}
+
+body.dark-theme summary {
+    background-color: #333;
+    color: #eee;
+}
+
+body.dark-theme .story-panel {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-theme .story-panel h3 {
+    color: #2a6496;
+}
+
+body.dark-theme .resizer:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-theme #model-select {
+    background-color: #333; /* Dark background */
+    color: #eee; /* Light text */
+    border-color: #555; /* Darker border */
 }

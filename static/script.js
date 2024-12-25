@@ -197,6 +197,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call loadStoryList on page load to display saved stories
     loadStoryList();
 
+    const lightModeRadio = document.getElementById('light-mode');
+    const darkModeRadio = document.getElementById('dark-mode');
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+    }
+
+    lightModeRadio.addEventListener('change', () => applyTheme('light'));
+    darkModeRadio.addEventListener('change', () => applyTheme('dark'));
+
     generateButton.addEventListener('click', function() {
         if (!isGenerating) {
             // Start generation
@@ -333,20 +347,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to convert innerText to HTML with <br> tags for newlines and spans for color
-    function convertTextToHtml(text, color = 'black') {
-        // Replace newlines with <br> tags
-        text = text.replace(/\n+/g, '<br>');
-        // Wrap the entire text in a span with the specified color
-        return `<span style="color: ${color};">${text}</span>`;
+function convertTextToHtml(text, color = 'black') {
+    // Replace newlines with <br> tags
+    text = text.replace(/\n+/g, '<br>');
+    // Check if dark mode is active and adjust default color
+    if (document.body.classList.contains('dark-theme')) {
+        if (color === 'black') {
+            color = 'white'; // Change default color to white in dark mode
+        } else if (color === 'darkmagenta') {
+            color = '#c792ea'; // light purple
+        }
     }
+    // Wrap the entire text in a span with the specified color
+    return `<span style="color: ${color};">${text}</span>`;
+}
 
-    // Function to reset the color of previously generated text to black
-    function resetPreviousTextColors(storyEditor) {
-        const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"]');
-        spans.forEach(span => {
+// Function to reset the color of previously generated text to black or white
+function resetPreviousTextColors(storyEditor) {
+    const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"], span[style*="color: #c792ea"]');
+    spans.forEach(span => {
+        // Check if dark mode is active and adjust color accordingly
+        if (document.body.classList.contains('dark-theme')) {
+            span.style.color = 'white';
+        } else {
             span.style.color = 'black';
-        });
-    }
+        }
+    });
+}
 
     // Resizer logic
     const leftResizer = document.getElementById('left-resizer');
