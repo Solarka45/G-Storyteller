@@ -372,6 +372,18 @@ document.addEventListener('DOMContentLoaded', function() {
         textColorInput.value = textColor; // Update the input value just in case
     }
 
+    // Function to remove color spans from the entire story editor content
+    function removeColorSpans(storyEditor) {
+        const spans = storyEditor.querySelectorAll('span[style*="color"]');
+        spans.forEach(span => {
+            const parent = span.parentNode;
+            while (span.firstChild) {
+                parent.insertBefore(span.firstChild, span);
+            }
+            parent.removeChild(span);
+        });
+    }
+
     // Function to apply the default appearance settings
     function applyDefaultAppearance() {
         lightModeRadio.checked = true;
@@ -496,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 story_tags: formData.story_tags,
                 additional_details: formData.additional_details,
                 plot_direction: formData.plot_direction,
-                story_content: formData.story_content, // Get story content before adding new text
+                story_content: formData.story_content,
                 system_instruction: formData.system_instruction,
                 temperature: temperature,
                 outputLength: outputLength,
@@ -541,16 +553,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error: ' + result.error);
                 } else {
                     const storyEditor = document.getElementById('story-editor');
-                    // Reset color of previously generated text
-                    resetPreviousTextColors(storyEditor);
+                    // Remove existing color spans
+                    removeColorSpans(storyEditor);
+
                     // Clean the existing text while preserving newlines
-                    let cleanedExistingText = storyEditor.innerText.replace(/ +/g, ' ');
-                    // Convert the cleaned existing text to HTML with spans for color
-                    let existingHtml = convertTextToHtml(cleanedExistingText);
-                    // Convert the new generated text to HTML with spans for color, using the selected text color
-                    let newHtml = convertTextToHtml(result.generated_text, textColorInput.value);
-                    // Combine the cleaned existing HTML with the new HTML
-                    storyEditor.innerHTML = existingHtml + (existingHtml.endsWith('<br>') || existingHtml === '' ? '' : ' ') + newHtml;
+                    let cleanedExistingText = storyEditor.innerHTML.replace(/ +/g, ' ');
+
+                    // Append the new generated text with a color span
+                    const newText = result.generated_text;
+                    const coloredNewText = `<span style="color: ${textColorInput.value};">${newText}</span>`;
+
+                    storyEditor.innerHTML = cleanedExistingText + (cleanedExistingText.endsWith('<br>') || cleanedExistingText === '' ? '' : ' ') + coloredNewText;
 
                     // Save the story after the generated text has been added
                     formData.story_content = storyEditor.innerHTML; // Update with new content
