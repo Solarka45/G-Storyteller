@@ -6,6 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const spinner = document.getElementById('spinner');
     const storyList = document.querySelector('.story-list'); // Get the story list container
 
+    // Get the story editor element
+    const storyEditor = document.getElementById('story-editor');
+
+    // Function to handle manual edits to the story editor
+    function handleStoryEditorInput() {
+        const formData = getFormData(); // Get all form data
+        formData.story_content = storyEditor.innerHTML; // Update story_content with edited HTML
+        saveStory(formData.story_title, formData); // Save the story
+    }
+
+    // Add an event listener for the 'input' event on the story editor
+    storyEditor.addEventListener('input', handleStoryEditorInput);
+
     // Slider definitions
     const temperatureSlider = document.getElementById('temperature-slider');
     const temperatureInput = document.getElementById('temperature-input');
