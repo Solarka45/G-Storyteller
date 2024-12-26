@@ -267,7 +267,22 @@ details > *:not(summary) {
     
 }
 
+#appearance-details .form-group {
+    margin-bottom: -10px;
+}
+
+#appearance-details .form-group label {
+    margin-bottom: 0;
+}
+
+#appearance-details .form-group:nth-child(3) { /* Target the form-group containing font-family-select */
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically */
+}
+
 #font-family-select {
+    margin-left: 10px;
+    margin-right: 20px;
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -276,6 +291,10 @@ details > *:not(summary) {
     font-family: 'Source Sans Pro', sans-serif;
     background-color: #fff;
     color: #333;
+}
+
+#text-color-input {
+    margin-left: 10px;
 }
 
 /* Slider styles */
