@@ -530,7 +530,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 generateButton.innerHTML = 'Generate';
             });
         } else {
-            // ... (existing cancel logic)
+            // Cancel generation
+            controller.abort();
+            fetch('/cancel_generation', {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Handle non-OK responses from /cancel_generation
+                    throw new Error('Failed to cancel generation.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.cancelled) {
+                    console.log('Generation cancelled by user.');
+                } else {
+                    console.error('Error cancelling generation.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message || 'An error occurred while cancelling.');
+            });
         }
     });
 
