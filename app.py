@@ -113,9 +113,9 @@ def generate():
         system_instruction = "Continue this story."
 
     model = genai.GenerativeModel(model_name=selected_model,
-                                    generation_config=generation_config,
-                                    safety_settings=safety_settings,
-                                    system_instruction=system_instruction)
+                                  generation_config=generation_config,
+                                  safety_settings=safety_settings,
+                                  system_instruction=system_instruction)
 
     # Prepare the prompt with system instructions
     prompt_parts = [
@@ -146,6 +146,12 @@ def generate():
         "\nPrevious story text:\n",
         data.get('story_content')
     ])
+
+    # Print the prompt to the console for debugging
+    # prompt = "".join(prompt_parts)
+    # print("----- Prompt -----")
+    # print(prompt)
+    # print("-------------------")
 
     # Generate content
     try:
