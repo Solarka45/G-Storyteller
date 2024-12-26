@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle manual edits to the story editor
     function handleStoryEditorInput() {
+        if (event.inputType === 'insertParagraph') {
+            // Prevent the default behavior of inserting a newline character
+            event.preventDefault();
+    
+            // Insert an en space character instead
+            document.execCommand('insertHTML', false, ' ');
+        }
+
         const formData = getFormData(); // Get all form data
         formData.story_content = storyEditor.innerHTML; // Update story_content with edited HTML
         saveStory(formData.story_title, formData); // Save the story
@@ -628,7 +636,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to convert innerText to HTML with <br> tags for newlines and spans for color
     function convertTextToHtml(text, color = 'black') {
         // Replace newlines with <br> tags
-        text = text.replace(/\n+/g, '<br>');
+        text = text.replace(/\n+/g, '<br>&ensp;');
         // Check if dark mode is active and adjust default color
         if (document.body.classList.contains('dark-theme')) {
             if (color === 'black') {
@@ -640,19 +648,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Wrap the entire text in a span with the specified color
         return `<span style="color: ${color};">${text}</span>`;
     }
-
-// Function to reset the color of previously generated text to black or white
-function resetPreviousTextColors(storyEditor) {
-    const spans = storyEditor.querySelectorAll('span[style*="color: darkmagenta"], span[style*="color: #c792ea"]');
-    spans.forEach(span => {
-        // Check if dark mode is active and adjust color accordingly
-        if (document.body.classList.contains('dark-theme')) {
-            span.style.color = 'white';
-        } else {
-            span.style.color = 'black';
-        }
-    });
-}
 
     // Resizer logic
     const leftResizer = document.getElementById('left-resizer');
