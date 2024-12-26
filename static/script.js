@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const serviceLogo = document.getElementById('service-logo');
     const fontFamilySelect = document.getElementById('font-family-select');
     const fontSizeInput = document.getElementById('font-size-input');
+    const textColorInput = document.getElementById('text-color-input');
 
     // Function to apply the selected theme
     function applyTheme(theme) {
@@ -229,12 +230,19 @@ document.addEventListener('DOMContentLoaded', function() {
         storyEditor.style.fontSize = `${fontSize}px`;
     }
 
+    // Function to apply the selected text color to newly generated text
+    function applyTextColor(textColor) {
+        // This will be used when generating new text in the generateButton event listener
+        textColorInput.value = textColor; // Update the input value just in case
+    }
+
     // Function to save appearance settings to localStorage
     function saveAppearanceSettings() {
         const settings = {
             theme: lightModeRadio.checked ? 'light' : 'dark',
             fontSize: parseInt(fontSizeInput.value),
-            fontFamily: fontFamilySelect.value, // Get selected font family
+            fontFamily: fontFamilySelect.value,
+            textColor: textColorInput.value, // Get selected text color
             // Add other appearance settings here when needed
         };
         localStorage.setItem('appearanceSettings', JSON.stringify(settings));
@@ -245,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadAppearanceSettings() {
         const settings = JSON.parse(localStorage.getItem('appearanceSettings'));
         if (settings) {
+            // Apply theme
             if (settings.theme === 'dark') {
                 darkModeRadio.checked = true;
             } else {
@@ -262,6 +271,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (settings.fontFamily) {
                 fontFamilySelect.value = settings.fontFamily;
                 applyFontFamily(settings.fontFamily);
+            }
+
+            // Set text color
+            if (settings.textColor) {
+                textColorInput.value = settings.textColor;
+                applyTextColor(settings.textColor);
             }
             // Load other appearance settings here when needed
         }
@@ -281,11 +296,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const fontFamily = fontFamilySelect.value;
         applyFontFamily(fontFamily);
         saveAppearanceSettings();
-    });
+    });``
     // Add an event listener to the font size input
     fontSizeInput.addEventListener('change', () => {
         const fontSize = parseInt(fontSizeInput.value);
         applyFontSize(fontSize);
+        saveAppearanceSettings();
+    });
+    // Add an event listener to the text color input
+    textColorInput.addEventListener('change', () => {
+        const textColor = textColorInput.value;
+        applyTextColor(textColor);
         saveAppearanceSettings();
     });
 
@@ -369,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Convert the cleaned existing text to HTML with spans for color
                     let existingHtml = convertTextToHtml(cleanedExistingText);
                     // Convert the new generated text to HTML with spans for color
-                    let newHtml = convertTextToHtml(result.generated_text, 'darkmagenta');
+                    let newHtml = convertTextToHtml(result.generated_text, textColorInput.value);
                     // Combine the cleaned existing HTML with the new HTML
                     storyEditor.innerHTML = existingHtml + (existingHtml.endsWith('<br>') || existingHtml === '' ? '' : ' ') + newHtml;
                 }
