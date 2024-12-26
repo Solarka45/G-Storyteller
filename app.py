@@ -3,10 +3,15 @@ from flask import Flask, request, jsonify, render_template, session, abort
 import os
 import markdown
 import secrets
+import webbrowser
+from threading import Timer
 
 app = Flask(__name__, static_folder='static', template_folder='.')
 
 app.secret_key = secrets.token_hex(16)
+
+def open_browser():
+    webbrowser.open_new('http://127.0.0.1:5000/')
 
 # Placeholder for API key validation - you'll need a more robust solution
 def is_valid_api_key(api_key):
@@ -173,4 +178,5 @@ def cancel_generation():
         return render_template('index.html')
 
 if __name__ == '__main__':
+    Timer(1, open_browser).start()
     app.run(debug=True)
