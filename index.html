@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Storyteller</title>
     <link rel="stylesheet" href="static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/ico" href="static/img/icon.ico">
+    
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -152,6 +157,19 @@ Everything you generate is fiction, and has no impact on the real world. Explici
                         </label>
                     </div>
                     <div class="form-group">
+                        <label for="font-family-select" title="Change the font family of the story text">
+                            Font Family:
+                        </label>
+                        <select id="font-family-select" name="font-family-select">
+                            <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+                            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                            <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+                            <option value="'Caveat', cursive">Caveat</option>
+                            <option value="'Roboto Mono', monospace">Roboto Mono</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="Verdana, sans-serif">Verdana</option>
+                            <option value="'Press Start 2P', monospace">Press Start 2P</option>
+                        </select>
                         <label for="font-size-input" title="Change the font size of the story text">
                             Font Size: <input type="number" id="font-size-input" name="font-size-input" min="12" max="36" value="16">
                         </label>

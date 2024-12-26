@@ -267,6 +267,17 @@ details > *:not(summary) {
     
 }
 
+#font-family-select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    appearance: auto;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
 /* Slider styles */
 input[type="range"] {
     -webkit-appearance: none;
@@ -405,4 +416,10 @@ body.dark-theme #model-select {
     background-color: #333; /* Dark background */
     color: #eee; /* Light text */
     border-color: #555; /* Darker border */
+}
+
+body.dark-theme #font-family-select {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
 }

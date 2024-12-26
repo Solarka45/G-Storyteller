@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightModeRadio = document.getElementById('light-mode');
     const darkModeRadio = document.getElementById('dark-mode');
     const serviceLogo = document.getElementById('service-logo');
+    const fontFamilySelect = document.getElementById('font-family-select');
     const fontSizeInput = document.getElementById('font-size-input');
 
     // Function to apply the selected theme
@@ -216,6 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to apply the selected font family to the story editor
+    function applyFontFamily(fontFamily) {
+        const storyEditor = document.getElementById('story-editor');
+        storyEditor.style.fontFamily = fontFamily;
+    }
+
     // Function to apply the selected font size to the story editor
     function applyFontSize(fontSize) {
         const storyEditor = document.getElementById('story-editor');
@@ -226,7 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function saveAppearanceSettings() {
         const settings = {
             theme: lightModeRadio.checked ? 'light' : 'dark',
-            fontSize: parseInt(fontSizeInput.value), // Get font size as an integer
+            fontSize: parseInt(fontSizeInput.value),
+            fontFamily: fontFamilySelect.value, // Get selected font family
             // Add other appearance settings here when needed
         };
         localStorage.setItem('appearanceSettings', JSON.stringify(settings));
@@ -249,6 +257,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 fontSizeInput.value = settings.fontSize;
                 applyFontSize(settings.fontSize);
             }
+
+            // Set font family
+            if (settings.fontFamily) {
+                fontFamilySelect.value = settings.fontFamily;
+                applyFontFamily(settings.fontFamily);
+            }
             // Load other appearance settings here when needed
         }
     }
@@ -262,7 +276,12 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme('dark');
         saveAppearanceSettings();
     });
-
+    // Add an event listener to the font family select
+    fontFamilySelect.addEventListener('change', () => {
+        const fontFamily = fontFamilySelect.value;
+        applyFontFamily(fontFamily);
+        saveAppearanceSettings();
+    });
     // Add an event listener to the font size input
     fontSizeInput.addEventListener('change', () => {
         const fontSize = parseInt(fontSizeInput.value);
