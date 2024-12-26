@@ -203,7 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightModeRadio = document.getElementById('light-mode');
     const darkModeRadio = document.getElementById('dark-mode');
     const serviceLogo = document.getElementById('service-logo');
+    const fontSizeInput = document.getElementById('font-size-input');
 
+    // Function to apply the selected theme
     function applyTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark-theme');
@@ -214,10 +216,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to apply the selected font size to the story editor
+    function applyFontSize(fontSize) {
+        const storyEditor = document.getElementById('story-editor');
+        storyEditor.style.fontSize = `${fontSize}px`;
+    }
+
     // Function to save appearance settings to localStorage
     function saveAppearanceSettings() {
         const settings = {
             theme: lightModeRadio.checked ? 'light' : 'dark',
+            fontSize: parseInt(fontSizeInput.value), // Get font size as an integer
+            // Add other appearance settings here when needed
         };
         localStorage.setItem('appearanceSettings', JSON.stringify(settings));
         console.log('Appearance settings saved.');
@@ -227,15 +237,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadAppearanceSettings() {
         const settings = JSON.parse(localStorage.getItem('appearanceSettings'));
         if (settings) {
-            // Correctly set the checked property based on the loaded theme
             if (settings.theme === 'dark') {
                 darkModeRadio.checked = true;
-                lightModeRadio.checked = false; // Uncheck the other radio
             } else {
                 lightModeRadio.checked = true;
-                darkModeRadio.checked = false; // Uncheck the other radio
             }
             applyTheme(settings.theme);
+
+            // Set font size
+            if (settings.fontSize) {
+                fontSizeInput.value = settings.fontSize;
+                applyFontSize(settings.fontSize);
+            }
             // Load other appearance settings here when needed
         }
     }
@@ -247,6 +260,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     darkModeRadio.addEventListener('change', () => {
         applyTheme('dark');
+        saveAppearanceSettings();
+    });
+
+    // Add an event listener to the font size input
+    fontSizeInput.addEventListener('change', () => {
+        const fontSize = parseInt(fontSizeInput.value);
+        applyFontSize(fontSize);
         saveAppearanceSettings();
     });
 
