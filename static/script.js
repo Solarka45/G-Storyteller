@@ -84,35 +84,65 @@ document.addEventListener('DOMContentLoaded', function() {
         loadStoryList(); // Refresh the story list
     }
 
+    // Function to duplicate an existing story  
+    function duplicateStory(originalStoryTitle) {
+        const originalStoryData = JSON.parse(localStorage.getItem(originalStoryTitle));
+        if (originalStoryData) {
+            // Find a unique name for the new story
+            let newStoryTitle = `${originalStoryTitle} (1)`;
+            let i = 2;
+            while (localStorage.getItem(newStoryTitle)) {
+                newStoryTitle = `${originalStoryTitle} (${i})`;
+                i++;
+            }
+
+            // Create a deep copy of the story data using JSON.parse(JSON.stringify())
+            const newStoryData = JSON.parse(JSON.stringify(originalStoryData));
+
+            // Update the story_title in the new data
+            newStoryData.story_title = newStoryTitle;
+
+            saveStory(newStoryTitle, newStoryData);
+            console.log(`Story "${originalStoryTitle}" duplicated to "${newStoryTitle}".`);
+        } else {
+            console.error(`Story "${originalStoryTitle}" not found.`);
+        }
+    }
+
     // Function to load and display the list of saved stories
     function loadStoryList() {
         storyList.innerHTML = ''; // Clear the current list
-    
+
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-    
+
             // Check if the key belongs to a story (not appearance settings or other items)
             if (key !== 'appearanceSettings' && key !== 'api_key') {
-                const storyTitle = key; // Key is the story title
+                const storyTitle = key;
                 const storyPanel = document.createElement('div');
                 storyPanel.classList.add('story-panel');
                 storyPanel.innerHTML = `
                     <h3>${storyTitle}</h3>
                     <button class="delete-button">Delete</button>
+                    <button class="duplicate-button">Duplicate</button>
                 `;
-    
+
+                // Add event listener to the story panel
                 storyPanel.addEventListener('click', function(event) {
                     if (event.target.classList.contains('delete-button')) {
                         // Delete button clicked
                         if (confirm(`Are you sure you want to delete the story "${storyTitle}"?`)) {
                             deleteStory(storyTitle);
                         }
+                    } else if (event.target.classList.contains('duplicate-button')) {
+                        // Duplicate button clicked
+                        duplicateStory(storyTitle);
                     } else {
                         // Story panel clicked
                         loadStory(storyTitle);
                     }
                 });
-    
+
                 storyList.appendChild(storyPanel);
             }
         }
@@ -406,10 +436,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(() => {
                 isGenerating = false;
                 generateButton.innerHTML = 'Generate';
-            });
 
-            // Save the story after generation
-            saveStory(formData.story_title, formData);
+                // Save the story after generation
+                saveStory(formData.story_title, formData);
+            });  
         } else {
             // Cancel generation
             controller.abort();
