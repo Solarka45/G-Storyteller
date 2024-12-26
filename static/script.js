@@ -188,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addWorldEntryButton = document.getElementById('add-world-entry-button');
     const worldEntriesContainer = document.getElementById('world-entries-container');
 
+    // Function to create a new world entry panel
     function createWorldEntryPanel(data = null) {
         const entryPanel = document.createElement('div');
         entryPanel.classList.add('world-entry-panel');
@@ -221,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.textContent = 'Delete';
 
         // Add an event listener to the delete button
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', function(event) {
             if (confirm('Are you sure you want to delete this entry?')) {
                 entryPanel.remove();
             }
@@ -229,9 +230,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Populate the inputs if data is provided
         if (data) {
-            entryTypeInput.value = data.type;
-            entryNameInput.value = data.name;
-            entryDescriptionInput.value = data.description;
+            entryTypeInput.value = data.type || '';
+            entryNameInput.value = data.name || '';
+            entryDescriptionInput.value = data.description || '';
+        } else {
+            entryTypeInput.value = '';
+            entryNameInput.value = '';
+            entryDescriptionInput.value = '';
+        }
+
+        if (data.type === 'click') {
+            entryTypeInput.value = '';
         }
 
         entryPanel.appendChild(entryTypeLabel);
@@ -241,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         worldEntriesContainer.appendChild(entryPanel);
     }
-    
+        
     addWorldEntryButton.addEventListener('click', createWorldEntryPanel);
 
     // SLIDER SETTINGS
@@ -369,8 +378,8 @@ document.addEventListener('DOMContentLoaded', function() {
         darkModeRadio.checked = false;
         applyTheme('light'); // Apply light theme
 
-        fontSizeInput.value = 16;
-        applyFontSize(16);
+        fontSizeInput.value = 18;
+        applyFontSize(18);
 
         fontFamilySelect.value = "'Source Sans Pro', sans-serif";
         applyFontFamily("'Source Sans Pro', sans-serif");
