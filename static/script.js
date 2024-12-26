@@ -231,10 +231,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update top_k when the number input is changed
     topKInput.addEventListener('input', function() {
         let value = parseInt(topKInput.value);
-        if (isNaN(value) || value < 0) {
-            value = 0;
-        } else if (value > 1) {
+        if (isNaN(value) || value < 1) {
             value = 1;
+        } else if (value > 400) {
+            value = 400;
         }
         updateTopK(value);
     });
