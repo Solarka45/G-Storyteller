@@ -32,7 +32,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to get all form data
     function getFormData() {
         const saveApiKey = document.getElementById('save-api-key').checked;
-        const apiKey = saveApiKey ? document.getElementById('api-key').value : ''; // Save API key only if checkbox is checked
+        const apiKey = saveApiKey ? document.getElementById('api-key').value : '';
+
+        // Get world entries data
+        const worldEntries = [];
+        const worldEntryPanels = document.querySelectorAll('.world-entry-panel');
+        worldEntryPanels.forEach(panel => {
+            const entryType = panel.querySelector('.entry-type-input').value;
+            const entryName = panel.querySelector('.entry-name-input').value;
+            const entryDescription = panel.querySelector('.entry-description-input').value;
+            worldEntries.push({
+                type: entryType,
+                name: entryName,
+                description: entryDescription
+            });
+        });
 
         return {
             selected_model: document.getElementById('model-select').value,
@@ -47,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
             top_p: parseFloat(topPInput.value),
             top_k: parseInt(topKInput.value),
             api_key: apiKey,
-            save_api_key: saveApiKey
+            save_api_key: saveApiKey,
+            world_entries: worldEntries // Add world entries to form data
         };
     }
 
@@ -69,6 +84,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Only set API key if it was saved
         if (data.save_api_key) {
             document.getElementById('api-key').value = data.api_key;
+        }
+
+        // Set world entries
+        if (data.world_entries) {
+            worldEntriesContainer.innerHTML = ''; // Clear existing entries
+            data.world_entries.forEach(entry => {
+                createWorldEntryPanel(entry);
+            });
         }
     }
 
@@ -165,50 +188,57 @@ document.addEventListener('DOMContentLoaded', function() {
     const addWorldEntryButton = document.getElementById('add-world-entry-button');
     const worldEntriesContainer = document.getElementById('world-entries-container');
 
-    function createWorldEntryPanel() {
+    function createWorldEntryPanel(data = null) {
         const entryPanel = document.createElement('div');
         entryPanel.classList.add('world-entry-panel');
-    
+
         const entryTypeLabel = document.createElement('label');
         entryTypeLabel.textContent = 'Entry Type:';
         const entryTypeInput = document.createElement('input');
+        entryTypeInput.classList.add('entry-type-input');
         entryTypeInput.type = 'text';
         entryTypeInput.placeholder = 'e.g. Character, Location, Item';
         entryTypeLabel.appendChild(entryTypeInput);
-    
+
         const entryNameLabel = document.createElement('label');
         entryNameLabel.textContent = 'Name:';
         const entryNameInput = document.createElement('input');
+        entryNameInput.classList.add('entry-name-input');
         entryNameInput.type = 'text';
         entryNameInput.placeholder = 'e.g. John, New York, Sword of Destiny';
         entryNameLabel.appendChild(entryNameInput);
-    
+
         const entryDescriptionLabel = document.createElement('label');
         entryDescriptionLabel.textContent = 'Description:';
         const entryDescriptionInput = document.createElement('textarea');
+        entryDescriptionInput.classList.add('entry-description-input');
         entryDescriptionInput.placeholder = 'Enter description here...';
         entryDescriptionLabel.appendChild(entryDescriptionInput);
-    
+
         // Add a delete button to the entry panel
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-entry-button');
         deleteButton.textContent = 'Delete';
-    
+
         // Add an event listener to the delete button
         deleteButton.addEventListener('click', function() {
             if (confirm('Are you sure you want to delete this entry?')) {
                 entryPanel.remove();
-                // You might want to save the updated world entries here,
-                // depending on when you decide to save them (e.g., on each change
-                // or when the user clicks a "Save" button for the whole story).
             }
         });
-    
+
+        // Populate the inputs if data is provided
+        if (data) {
+            entryTypeInput.value = data.type;
+            entryNameInput.value = data.name;
+            entryDescriptionInput.value = data.description;
+        }
+
         entryPanel.appendChild(entryTypeLabel);
         entryPanel.appendChild(entryNameLabel);
         entryPanel.appendChild(entryDescriptionLabel);
         entryPanel.appendChild(deleteButton); // Append the delete button
-    
+
         worldEntriesContainer.appendChild(entryPanel);
     }
     
