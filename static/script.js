@@ -236,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fontFamilySelect = document.getElementById('font-family-select');
     const fontSizeInput = document.getElementById('font-size-input');
     const textColorInput = document.getElementById('text-color-input');
+    const resetAppearanceButton = document.getElementById('reset-appearance-button');
 
     // Function to apply the selected theme
     function applyTheme(theme) {
@@ -264,6 +265,24 @@ document.addEventListener('DOMContentLoaded', function() {
     function applyTextColor(textColor) {
         // This will be used when generating new text in the generateButton event listener
         textColorInput.value = textColor; // Update the input value just in case
+    }
+
+    // Function to apply the default appearance settings
+    function applyDefaultAppearance() {
+        lightModeRadio.checked = true;
+        darkModeRadio.checked = false;
+        applyTheme('light'); // Apply light theme
+
+        fontSizeInput.value = 16;
+        applyFontSize(16);
+
+        fontFamilySelect.value = "'Source Sans Pro', sans-serif";
+        applyFontFamily("'Source Sans Pro', sans-serif");
+
+        textColorInput.value = "#c792ea";
+        applyTextColor("#c792ea");
+
+        saveAppearanceSettings(); // Save the default settings to localStorage
     }
 
     // Function to save appearance settings to localStorage
@@ -338,6 +357,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const textColor = textColorInput.value;
         applyTextColor(textColor);
         saveAppearanceSettings();
+    });
+    // Add an event listener to the reset button
+    resetAppearanceButton.addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset appearance settings to default?')) {
+            applyDefaultAppearance();
+        }
     });
 
     // Load appearance settings on page load
