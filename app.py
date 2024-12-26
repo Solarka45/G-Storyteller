@@ -148,10 +148,10 @@ def generate():
     ])
 
     # Print the prompt to the console for debugging
-    prompt = "".join(prompt_parts)
-    print("----- Prompt -----")
-    print(prompt)
-    print("-------------------")
+    # prompt = "".join(prompt_parts)
+    # print("----- Prompt -----")
+    # print(prompt)
+    # print("-------------------")
 
     # Generate content
     try:

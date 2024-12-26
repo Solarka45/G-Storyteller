@@ -555,17 +555,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     const storyEditor = document.getElementById('story-editor');
                     // Remove existing color spans
                     removeColorSpans(storyEditor);
-
-                    // Clean the existing text while preserving newlines
+    
+                    // Trim whitespace from existing text content
                     let cleanedExistingText = storyEditor.innerHTML.replace(/ +/g, ' ');
-
-                    // Append the new generated text with a color span
-                    const newText = result.generated_text;
-                    const coloredNewText = `<span style="color: ${textColorInput.value};">${newText}</span>`;
-
-                    storyEditor.innerHTML = cleanedExistingText + (cleanedExistingText.endsWith('<br>') || cleanedExistingText === '' ? '' : ' ') + coloredNewText;
-
-                    // Save the story after the generated text has been added
+    
+                    // Ensure single space between existing and new text
+                    if (!cleanedExistingText.endsWith(' ') && cleanedExistingText !== '') {
+                        cleanedExistingText += ' ';
+                    }
+    
+                    // Convert the new generated text to HTML with spans for color, using the selected text color
+                    let newHtml = convertTextToHtml(result.generated_text, textColorInput.value);
+    
+                    // Append the new text
+                    storyEditor.innerHTML = cleanedExistingText + newHtml;
+    
+                    // Save the story after the generated text has been added and trimmed
                     formData.story_content = storyEditor.innerHTML; // Update with new content
                     saveStory(formData.story_title, formData);
                 }
@@ -621,20 +626,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to convert innerText to HTML with <br> tags for newlines and spans for color
-function convertTextToHtml(text, color = 'black') {
-    // Replace newlines with <br> tags
-    text = text.replace(/\n+/g, '<br>');
-    // Check if dark mode is active and adjust default color
-    if (document.body.classList.contains('dark-theme')) {
-        if (color === 'black') {
-            color = 'white'; // Change default color to white in dark mode
-        } else if (color === 'darkmagenta') {
-            color = '#c792ea'; // light purple
+    function convertTextToHtml(text, color = 'black') {
+        // Replace newlines with <br> tags
+        text = text.replace(/\n+/g, '<br>');
+        // Check if dark mode is active and adjust default color
+        if (document.body.classList.contains('dark-theme')) {
+            if (color === 'black') {
+                color = 'white'; // Change default color to white in dark mode
+            } else if (color === 'darkmagenta') {
+                color = '#c792ea'; // light purple
+            }
         }
+        // Wrap the entire text in a span with the specified color
+        return `<span style="color: ${color};">${text}</span>`;
     }
-    // Wrap the entire text in a span with the specified color
-    return `<span style="color: ${color};">${text}</span>`;
-}
 
 // Function to reset the color of previously generated text to black or white
 function resetPreviousTextColors(storyEditor) {
