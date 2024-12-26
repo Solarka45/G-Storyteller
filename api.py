@@ -1,13 +1,11 @@
 import google.generativeai as genai
-from flask import Flask, request, jsonify, render_template, session, abort
+from flask import Flask, request, jsonify, render_template, abort
 import os
 import markdown
 import secrets
 from pathlib import Path
 
-app = Flask(__name__, static_folder='static', template_folder='.')
-
-app.secret_key = secrets.token_hex(16)
+app = Flask(__name__, static_folder='../static', template_folder='../templates')
 
 # Placeholder for API key validation - you'll need a more robust solution
 def is_valid_api_key(api_key):
@@ -166,6 +164,3 @@ def cancel_generation():
     else:
         # If it's not an AJAX request, return the HTML page
         return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
