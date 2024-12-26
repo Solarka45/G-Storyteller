@@ -501,7 +501,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 temperature: temperature,
                 outputLength: outputLength,
                 top_p: topP,
-                top_k: topK
+                top_k: topK,
+                world_entries: formData.world_entries
             };
 
             fetch('/generate', {

@@ -57,6 +57,7 @@ def generate():
     story_tags = data.get('story_tags')
     additional_details = data.get('additional_details')
     plot_direction = data.get('plot_direction')
+    world_entries = data.get('world_entries')
 
     # Basic API key validation
     if not is_valid_api_key(api_key):
@@ -104,6 +105,8 @@ def generate():
         additional_details = "No Additional Details"
     if (plot_direction == ""):
         plot_direction = "Up to you"
+    if (world_entries == ""):
+        world_entries = "No additional info entries."
     if (data.get('story_content') == ""):
         data['story_content'] = "Begin the story youself."
     if (system_instruction == ""):
@@ -125,8 +128,30 @@ def generate():
         "\nPlot direction:\n",
         plot_direction,
         "\nPrevious story text:\n",
-        data.get('story_content')
+        data.get('story_content'),
+        "\nWorld entries:\n"
     ]
+
+    # Add world entries to the prompt
+    if world_entries:
+        for entry in world_entries:
+            prompt_parts.extend([
+                f"Entry Type: {entry['type']}\n",
+                f"Name: {entry['name']}\n",
+                f"Description: {entry['description']}\n"
+            ])
+    
+    # Add previous story text
+    prompt_parts.extend([
+        "\nPrevious story text:\n",
+        data.get('story_content')
+    ])
+
+    # Print the prompt to the console for debugging
+    # prompt = "".join(prompt_parts)
+    # print("----- Prompt -----")
+    # print(prompt)
+    # print("-------------------")
 
     # Generate content
     try:
