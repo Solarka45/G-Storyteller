@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify, render_template, session, abort
 import os
 import markdown
 import secrets
-from pathlib import Path
 
 app = Flask(__name__, static_folder='static', template_folder='.')
 
@@ -17,7 +16,7 @@ def is_valid_api_key(api_key):
 def get_api_key():
     api_key = None
     # Get the path to the user's Documents folder
-    documents_path = str(Path.home() / "Documents")
+    documents_path = os.path.join(os.path.expanduser("~"), "Documents")
     api_key_file_path = os.path.join(documents_path, 'api_key.txt')
 
     # Try to read API key from file
