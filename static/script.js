@@ -161,6 +161,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // WORLD ENTRIES
+    const addWorldEntryButton = document.getElementById('add-world-entry-button');
+    const worldEntriesContainer = document.getElementById('world-entries-container');
+
+    function createWorldEntryPanel() {
+        const entryPanel = document.createElement('div');
+        entryPanel.classList.add('world-entry-panel');
+    
+        const entryTypeLabel = document.createElement('label');
+        entryTypeLabel.textContent = 'Entry Type:';
+        const entryTypeInput = document.createElement('input');
+        entryTypeInput.type = 'text';
+        entryTypeInput.placeholder = 'e.g. Character, Location, Item';
+        entryTypeLabel.appendChild(entryTypeInput);
+    
+        const entryNameLabel = document.createElement('label');
+        entryNameLabel.textContent = 'Name:';
+        const entryNameInput = document.createElement('input');
+        entryNameInput.type = 'text';
+        entryNameInput.placeholder = 'e.g. John, New York, Sword of Destiny';
+        entryNameLabel.appendChild(entryNameInput);
+    
+        const entryDescriptionLabel = document.createElement('label');
+        entryDescriptionLabel.textContent = 'Description:';
+        const entryDescriptionInput = document.createElement('textarea');
+        entryDescriptionInput.placeholder = 'Enter description here...';
+        entryDescriptionLabel.appendChild(entryDescriptionInput);
+    
+        // Add a delete button to the entry panel
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-entry-button');
+        deleteButton.textContent = 'Delete';
+    
+        // Add an event listener to the delete button
+        deleteButton.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                entryPanel.remove();
+                // You might want to save the updated world entries here,
+                // depending on when you decide to save them (e.g., on each change
+                // or when the user clicks a "Save" button for the whole story).
+            }
+        });
+    
+        entryPanel.appendChild(entryTypeLabel);
+        entryPanel.appendChild(entryNameLabel);
+        entryPanel.appendChild(entryDescriptionLabel);
+        entryPanel.appendChild(deleteButton); // Append the delete button
+    
+        worldEntriesContainer.appendChild(entryPanel);
+    }
+    
+    addWorldEntryButton.addEventListener('click', createWorldEntryPanel);
+
     // SLIDER SETTINGS
     function updateTemperature(value) {
         temperatureInput.value = value;
