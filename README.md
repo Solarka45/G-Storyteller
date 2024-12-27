@@ -28,8 +28,10 @@ G Storyteller is a web application that lets you co-write stories with the help 
 3. You can either create an API key on a new project or select an existing Google Cloud project.
 4. Copy the generated API key.
 5. Paste the API key into the corresponding field in G Storyteller. It will not be saved unless to choose to, even then it will only be saved for the current story.
+
 OR
-5. Create a file "api_key.txt" (case-sensitive) in your Documents folder and copy the key there. This way, it will always be referenced from there.
+
+6. Create a file "api_key.txt" (case-sensitive) in your Documents folder and copy the key there. This way, it will always be referenced from there.
 
 ## Usage
 
