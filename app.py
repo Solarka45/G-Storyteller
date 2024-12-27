@@ -1,12 +1,33 @@
 import google.generativeai as genai
-from flask import Flask, request, jsonify, render_template, session, abort
+from flask import Flask, request, jsonify, render_template, session, abort, send_from_directory
 import os
 import markdown
 import secrets
 import webbrowser
 from threading import Timer
+import sys
 
-app = Flask(__name__, static_folder='static', template_folder='.')
+app = Flask(__name__, static_folder='static', template_folder='templates')
+
+# Add this function to determine the base directory
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        # If the application is run as a bundle, the PyInstaller bootloader
+        # extends the sys module by a flag frozen=True and sets the app
+        # path into variable _MEIPASS'.
+        base_dir = sys._MEIPASS
+    else:
+        base_dir = os.path.abspath(".")
+    return base_dir
+
+# Modify the static and template folder paths
+app.static_folder = os.path.join(get_base_dir(), 'static')
+app.template_folder = os.path.join(get_base_dir(), 'templates')
+
+# Use this function to serve the static files
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return send_from_directory(app.static_folder, path)
 
 #app.secret_key = secrets.token_hex(16)
 
